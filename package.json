@@ -22,7 +22,9 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@napi-rs/cli": "^2.4.4"
+    "@napi-rs/cli": "^2.4.4",
+    "chai": "^4.3.6",
+    "mocha": "^9.2.1"
   },
   "engines": {
     "node": ">= 10"
@@ -32,6 +34,7 @@
     "build": "napi build --platform --release",
     "build:debug": "napi build --platform",
     "prepublishOnly": "napi prepublish -t npm",
+    "test": "mocha --recursive test/",
     "version": "napi version"
   }
 }
