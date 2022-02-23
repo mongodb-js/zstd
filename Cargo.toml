@@ -1,0 +1,22 @@
+[package]
+edition = "2021"
+name = "mongodb-js_zstd"
+version = "0.0.0"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+# Default enable napi4 feature, see https://nodejs.org/api/n-api.html#node-api-version-matrix
+futures = "0.3"
+napi = { version = "2.1.0", default-features = false, features = [
+  "napi4",
+  "async"
+] }
+napi-derive = "2.1.0"
+
+[build-dependencies]
+napi-build = "1.2.1"
+
+[profile.release]
+lto = true
