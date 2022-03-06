@@ -8,11 +8,11 @@ crate-type = ["cdylib"]
 
 [dependencies]
 futures = "0.3"
-napi = { version = "2.1.0", default-features = false, features = [
+napi = { version = "2.2.0", default-features = false, features = [
   "napi8",
   "async"
 ] }
-napi-derive = "2.1.0"
+napi-derive = "2.2.0"
 zstd = "0.10.0+zstd.1.5.2"
 
 [build-dependencies]
