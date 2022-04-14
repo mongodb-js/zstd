@@ -5,7 +5,7 @@ describe('zstd', () => {
   describe('#compress', () => {
     const buffer = Buffer.from('test');
 
-    it('returns the buffer', async () => {
+    it('returns a compressed buffer', async () => {
       const result = await compress(buffer);
       expect(result).to.deep.equal(buffer);
     });

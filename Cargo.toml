@@ -13,7 +13,13 @@ napi = { version = "2.1.0", default-features = false, features = [
   "async"
 ] }
 napi-derive = "2.1.0"
-zstd = "0.10.0+zstd.1.5.2"
+async-compression = { version = "0.3.12", features = [
+  "tokio",
+  "zstd"
+] }
+tokio = { version = "1", features = [
+  "full"
+] }
 
 [build-dependencies]
 napi-build = "1.2.1"
