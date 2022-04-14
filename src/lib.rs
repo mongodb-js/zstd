@@ -1,28 +1,71 @@
 #[macro_use]
 extern crate napi_derive;
-extern crate tokio;
 
-use napi::bindgen_prelude::*;
-use async_compression::tokio::bufread::ZstdDecoder;
-use async_compression::tokio::write::ZstdEncoder;
-use tokio::io::AsyncReadExt as _;
-use tokio::io::AsyncWriteExt as _;
-use tokio::io::{BufReader, BufWriter};
+use napi::{
+  bindgen_prelude::AsyncTask,
+  Env, JsBuffer, JsBufferValue, Ref, Result, Task,
+};
 
-#[napi]
-async fn compress(buffer: Buffer) -> Result<Buffer> {
-  let input: Vec<u8> = buffer.into();
-  let mut encoder = ZstdEncoder::new(BufWriter::new(input));
-  let mut output: Vec<u8> = vec![];
-  encoder.write_all(&mut output).await?;
-  Ok(Buffer::from(output))
+struct Encoder {
+  data: Ref<JsBufferValue>
 }
 
 #[napi]
-async fn decompress(buffer: Buffer) -> Result<Buffer> {
-  let input: Vec<u8> = buffer.into();
-  let mut decoder = ZstdDecoder::new(BufReader::new(input.as_slice()));
-  let mut output: Vec<u8> = vec![];
-  decoder.read_to_end(&mut output).await?;
-  Ok(Buffer::from(output))
+impl Task for Encoder {
+  type Output = Vec<u8>;
+  type JsValue = JsBuffer;
+
+  fn compute(&mut self) -> Result<Self::Output> {
+    let data: &[u8] = self.data.as_ref();
+    Ok(data.to_vec())
+  }
+
+  fn resolve(&mut self, env: Env, output: Self::Output) -> Result<JsBuffer> {
+    env.create_buffer_with_data(output).map(|b| b.into_raw())
+  }
+
+  fn finally(&mut self, env: Env) -> Result<()> {
+    self.data.unref(env)?;
+    Ok(())
+  }
+}
+
+struct Decoder {
+  data: Ref<JsBufferValue>
+}
+
+#[napi]
+impl Task for Decoder {
+  type Output = Vec<u8>;
+  type JsValue = JsBuffer;
+
+  fn compute(&mut self) -> Result<Self::Output> {
+    let data: &[u8] = self.data.as_ref();
+    Ok(data.to_vec())
+  }
+
+  fn resolve(&mut self, env: Env, output: Self::Output) -> Result<JsBuffer> {
+    env.create_buffer_with_data(output).map(|b| b.into_raw())
+  }
+
+  fn finally(&mut self, env: Env) -> Result<()> {
+    self.data.unref(env)?;
+    Ok(())
+  }
+}
+
+#[napi]
+fn compress(data: JsBuffer) -> Result<AsyncTask<Encoder>> {
+  let encoder = Encoder {
+    data: data.into_ref()?,
+  };
+  Ok(AsyncTask::new(encoder))
+}
+
+#[napi]
+fn decompress(data: JsBuffer) -> Result<AsyncTask<Decoder>> {
+  let decoder = Decoder {
+    data: data.into_ref()?,
+  };
+  Ok(AsyncTask::new(decoder))
 }
