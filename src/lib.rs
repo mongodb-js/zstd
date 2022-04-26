@@ -3,8 +3,9 @@ extern crate napi_derive;
 
 use napi::{
   bindgen_prelude::AsyncTask,
-  Env, JsBuffer, JsBufferValue, Ref, Result, Task,
+  Env, Error, JsBuffer, JsBufferValue, Ref, Result, Status, Task,
 };
+use zstd::stream::{encode_all, decode_all};
 
 struct Encoder {
   data: Ref<JsBufferValue>
@@ -17,7 +18,7 @@ impl Task for Encoder {
 
   fn compute(&mut self) -> Result<Self::Output> {
     let data: &[u8] = self.data.as_ref();
-    Ok(data.to_vec())
+    encode_all(data, 3).map_err(|e| Error::new(Status::GenericFailure, format!("{}", e)))
   }
 
   fn resolve(&mut self, env: Env, output: Self::Output) -> Result<JsBuffer> {
@@ -41,7 +42,7 @@ impl Task for Decoder {
 
   fn compute(&mut self) -> Result<Self::Output> {
     let data: &[u8] = self.data.as_ref();
-    Ok(data.to_vec())
+    decode_all(data).map_err(|e| Error::new(Status::GenericFailure, format!("{}", e)))
   }
 
   fn resolve(&mut self, env: Env, output: Self::Output) -> Result<JsBuffer> {
