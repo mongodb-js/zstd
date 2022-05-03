@@ -4,7 +4,10 @@
   "main": "index.js",
   "types": "index.d.ts",
   "napi": {
-    "name": "zstd",
+    "name": "@mongodb-js/zstd",
+    "package": {
+      "name": "@mongodb-js/zstd"
+    },
     "triples": {
       "additional": [
         "aarch64-apple-darwin",
