@@ -28,10 +28,10 @@
   "resolved" "https://registry.npmjs.org/@hutson/parse-repository-url/-/parse-repository-url-3.0.2.tgz"
   "version" "3.0.2"
 
-"@napi-rs/cli@^2.4.4":
-  "integrity" "sha512-f+tvwCv1ka24dBqI2DgBhR7Oxl3DKHOp4onxLXwyBFt6iCADnr3YZIr1/2Iq5r3uqxFgaf01bfPsRQZPkEp0kQ=="
-  "resolved" "https://registry.npmjs.org/@napi-rs/cli/-/cli-2.4.4.tgz"
-  "version" "2.4.4"
+"@napi-rs/cli@^2.7.0":
+  "integrity" "sha512-bQb+r9/xW8LFRbpEN7A/4fX8LnEWbI0JzyOzXGDpO+cI8dXRxX7OPySOpzT2nBgP1brA2Ydkw/t9lyxLN9TlxQ=="
+  "resolved" "https://registry.npmjs.org/@napi-rs/cli/-/cli-2.7.0.tgz"
+  "version" "2.7.0"
 
 "@types/minimist@^1.2.0":
   "integrity" "sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ=="
