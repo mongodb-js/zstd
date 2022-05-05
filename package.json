@@ -9,6 +9,7 @@
       "name": "@mongodb-js/zstd"
     },
     "triples": {
+      "defaults": true,
       "additional": [
         "aarch64-apple-darwin",
         "aarch64-linux-android",
@@ -23,6 +24,10 @@
       ]
     }
   },
+  "files": [
+    "index.d.ts",
+    "index.js"
+  ],
   "license": "MIT",
   "devDependencies": {
     "@napi-rs/cli": "^2.4.4",
