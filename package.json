@@ -3,8 +3,9 @@
   "version": "0.0.1",
   "main": "index.js",
   "types": "index.d.ts",
+  "repository": "https://github.com/mongodb-js/zstd",
   "napi": {
-    "name": "@mongodb-js/zstd",
+    "name": "zstd",
     "package": {
       "name": "@mongodb-js/zstd"
     },
