@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.3](https://github.com/mongodb-js/zstd/compare/v0.0.2...v0.0.3) (2022-05-06)
+
+
+### Bug Fixes
+
+* update publish task regex ([b62d9b0](https://github.com/mongodb-js/zstd/commit/b62d9b0e644c85d3443f738d953ae7816d3eba00))
+
 ### [0.0.2](https://github.com/mongodb-js/zstd/compare/v0.0.1...v0.0.2) (2022-05-06)
 
 
