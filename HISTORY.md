@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.2](https://github.com/mongodb-js/zstd/compare/v0.0.1...v0.0.2) (2022-05-06)
+
+
+### Bug Fixes
+
+* dont use org in napi name ([9063ea8](https://github.com/mongodb-js/zstd/commit/9063ea8bb7b187aacd876f75b3e74bc0188e7a2b))
+
 ### 0.0.1 (2022-05-05)
 
 
