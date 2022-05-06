@@ -7,8 +7,11 @@ use napi::{
 };
 use zstd::stream::{encode_all, decode_all};
 
+const DEFAULT_LEVEL: i32 = 3;
+
 struct Encoder {
-  data: Ref<JsBufferValue>
+  data: Ref<JsBufferValue>,
+  level: i32
 }
 
 #[napi]
@@ -18,7 +21,7 @@ impl Task for Encoder {
 
   fn compute(&mut self) -> Result<Self::Output> {
     let data: &[u8] = self.data.as_ref();
-    encode_all(data, 3).map_err(|e| Error::new(Status::GenericFailure, format!("{}", e)))
+    encode_all(data, self.level).map_err(|e| Error::new(Status::GenericFailure, format!("{}", e)))
   }
 
   fn resolve(&mut self, env: Env, output: Self::Output) -> Result<JsBuffer> {
@@ -56,9 +59,10 @@ impl Task for Decoder {
 }
 
 #[napi]
-fn compress(data: JsBuffer) -> Result<AsyncTask<Encoder>> {
+fn compress(data: JsBuffer, level: Option<i32>) -> Result<AsyncTask<Encoder>> {
   let encoder = Encoder {
     data: data.into_ref()?,
+    level: level.unwrap_or(DEFAULT_LEVEL)
   };
   Ok(AsyncTask::new(encoder))
 }
