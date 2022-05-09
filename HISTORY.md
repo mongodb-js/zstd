@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5](https://github.com/mongodb-js/zstd/compare/v0.0.4...v0.0.5) (2022-05-09)
+
+
+### Bug Fixes
+
+* remove 686 win build ([ea36ddc](https://github.com/mongodb-js/zstd/commit/ea36ddc0ce3e6630321e7074a138f2d45dd16f4f))
+
 ### [0.0.4](https://github.com/mongodb-js/zstd/compare/v0.0.3...v0.0.4) (2022-05-06)
 
 
