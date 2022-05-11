@@ -1,8 +1,12 @@
-const { expect } = require('chai');
-const { compress, decompress } = require('../index');
+import { expect } from 'chai';
+
+import { compress, decompress } from '../index';
 
 describe('zstd', () => {
   describe('#compress', () => {
+    // TODO
+    // it('is an async function', () => expect(isAsyncFunction(compress)).to.be.true);
+
     const buffer = Buffer.from('test');
 
     context('when not providing a compression level', () => {
@@ -36,5 +40,10 @@ describe('zstd', () => {
         });
       });
     });
+  });
+
+  describe('#decompress', () => {
+    // TODO
+    // it('is an async function', () => expect(isAsyncFunction(decompress)).to.be.true);
   });
 });

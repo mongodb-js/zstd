@@ -13,14 +13,8 @@
       "defaults": true,
       "additional": [
         "aarch64-apple-darwin",
-        "aarch64-linux-android",
         "aarch64-unknown-linux-gnu",
-        "aarch64-unknown-linux-musl",
-        "aarch64-pc-windows-msvc",
-        "armv7-unknown-linux-gnueabihf",
-        "x86_64-unknown-linux-musl",
-        "x86_64-unknown-freebsd",
-        "armv7-linux-androideabi"
+        "i686-pc-windows-msvc"
       ]
     }
   },
@@ -28,23 +22,38 @@
     "index.d.ts",
     "index.js"
   ],
-  "license": "MIT",
+  "license": "Apache-2.0",
   "devDependencies": {
-    "@napi-rs/cli": "^2.7.0",
+    "@napi-rs/cli": "^2.8.0",
+    "@types/chai": "^4.3.1",
+    "@types/mocha": "^9.1.1",
+    "@typescript-eslint/eslint-plugin": "^5.23.0",
     "chai": "^4.3.6",
-    "mocha": "^9.2.1",
-    "standard-version": "^9.3.2"
+    "eslint": "^8.15.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "eslint-plugin-tsdoc": "^0.2.16",
+    "mocha": "^10.0.0",
+    "prettier": "^2.6.2",
+    "source-map-support": "^0.5.21",
+    "standard-version": "^9.3.2",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.4"
   },
   "engines": {
-    "node": ">= 10"
+    "node": ">= 14.19.x || >= 16.15.x || >= 18.x"
   },
   "scripts": {
+    "check:lint": "eslint .",
     "artifacts": "napi artifacts",
     "build": "napi build --platform --release",
     "build:debug": "napi build --platform",
     "prepublishOnly": "napi prepublish -t npm",
     "release": "standard-version -i HISTORY.md",
     "test": "mocha --recursive test/",
+    "pretest": "npm run build",
     "version": "napi version"
   }
 }
