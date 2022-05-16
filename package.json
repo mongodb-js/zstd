@@ -28,7 +28,7 @@
     "index.d.ts",
     "index.js"
   ],
-  "license": "MIT",
+  "license": "Apache-2.0",
   "devDependencies": {
     "@napi-rs/cli": "^2.7.0",
     "chai": "^4.3.6",
