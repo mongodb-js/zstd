@@ -52,11 +52,11 @@ Change history can be found in [`HISTORY.md`](https://github.com/mongodb-js/zstd
 ## Usage
 
 ```ts
-import { compress, decompress } from '@mongodb-js/zstd';
+import { compress, decompress } from '@mongodb-js/zstd'
 
-(async () => {
-  const buffer = Buffer.from('test');
-  const compressed = await compress(buffer, 10);
-  const decompressed = await decompress(compressed);
-})();
+;(async () => {
+  const buffer = Buffer.from('test')
+  const compressed = await compress(buffer, 10)
+  const decompressed = await decompress(compressed)
+})()
 ```
