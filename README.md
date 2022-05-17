@@ -17,12 +17,8 @@ npm install @mongodb-js/zstd
 | macOS x64        | ✓      | ✓      | ✓      | ✓      |
 | macOS arm64      | ✓      | ✓      | ✓      | ✓      |
 | Linux x64 gnu    | ✓      | ✓      | ✓      | ✓      |
-| Linux x64 musl   | ✓      | ✓      | ✓      | ✓      |
 | Linux arm gnu    | ✓      | ✓      | ✓      | ✓      |
 | Linux arm64 gnu  | ✓      | ✓      | ✓      | ✓      |
-| Linux arm64 musl | ✓      | ✓      | ✓      | ✓      |
-| Android arm64    | ✓      | ✓      | ✓      | ✓      |
-| Android armv7    | ✓      | ✓      | ✓      | ✓      |
 | FreeBSD x64      | ✓      | ✓      | ✓      | ✓      |
 
 ## API
