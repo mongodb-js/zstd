@@ -2,16 +2,15 @@
 extern crate napi_derive;
 
 use napi::{
-  bindgen_prelude::AsyncTask,
-  Env, Error, JsBuffer, JsBufferValue, Ref, Result, Status, Task,
+  bindgen_prelude::AsyncTask, Env, Error, JsBuffer, JsBufferValue, Ref, Result, Status, Task,
 };
-use zstd::stream::{encode_all, decode_all};
+use zstd::stream::{decode_all, encode_all};
 
 const DEFAULT_LEVEL: i32 = 3;
 
 struct Encoder {
   data: Ref<JsBufferValue>,
-  level: i32
+  level: i32,
 }
 
 #[napi]
@@ -35,7 +34,7 @@ impl Task for Encoder {
 }
 
 struct Decoder {
-  data: Ref<JsBufferValue>
+  data: Ref<JsBufferValue>,
 }
 
 #[napi]
@@ -62,7 +61,7 @@ impl Task for Decoder {
 fn compress(data: JsBuffer, level: Option<i32>) -> Result<AsyncTask<Encoder>> {
   let encoder = Encoder {
     data: data.into_ref()?,
-    level: level.unwrap_or(DEFAULT_LEVEL)
+    level: level.unwrap_or(DEFAULT_LEVEL),
   };
   Ok(AsyncTask::new(encoder))
 }
