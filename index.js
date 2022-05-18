@@ -22,18 +22,6 @@ switch (platform) {
           loadError = e;
         }
         break;
-      case 'arm64':
-        localFileExisted = existsSync(join(__dirname, 'zstd.win32-arm64-msvc.node'));
-        try {
-          if (localFileExisted) {
-            nativeBinding = require('./zstd.win32-arm64-msvc.node');
-          } else {
-            nativeBinding = require('@mongodb-js/zstd-win32-arm64-msvc');
-          }
-        } catch (e) {
-          loadError = e;
-        }
-        break;
       default:
         throw new Error(`Unsupported architecture on Windows: ${arch}`);
     }
@@ -66,21 +54,6 @@ switch (platform) {
         break;
       default:
         throw new Error(`Unsupported architecture on macOS: ${arch}`);
-    }
-    break;
-  case 'freebsd':
-    if (arch !== 'x64') {
-      throw new Error(`Unsupported architecture on FreeBSD: ${arch}`);
-    }
-    localFileExisted = existsSync(join(__dirname, 'zstd.freebsd-x64.node'));
-    try {
-      if (localFileExisted) {
-        nativeBinding = require('./zstd.freebsd-x64.node');
-      } else {
-        nativeBinding = require('@mongodb-js/zstd-freebsd-x64');
-      }
-    } catch (e) {
-      loadError = e;
     }
     break;
   case 'linux':
