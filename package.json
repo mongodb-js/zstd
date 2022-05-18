@@ -33,11 +33,12 @@
     "node": ">= 10"
   },
   "prettier": {
-    "printWidth": 120,
-    "semi": false,
-    "trailingComma": "all",
+    "printWidth": 100,
+    "tabWidth": 2,
+    "semi": true,
+    "trailingComma": "none",
     "singleQuote": true,
-    "arrowParens": "always"
+    "arrowParens": "avoid"
   },
   "scripts": {
     "artifacts": "napi artifacts",

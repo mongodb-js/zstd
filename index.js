@@ -1,154 +1,142 @@
-const { existsSync, readFileSync } = require('fs')
-const { join } = require('path')
+const { existsSync, readFileSync } = require('fs');
+const { join } = require('path');
 
-const { platform, arch } = process
+const { platform, arch } = process;
 
-let nativeBinding = null
-let localFileExisted = false
-let loadError = null
+let nativeBinding = null;
+let localFileExisted = false;
+let loadError = null;
 
 switch (platform) {
   case 'win32':
     switch (arch) {
       case 'x64':
-        localFileExisted = existsSync(
-          join(__dirname, 'zstd.win32-x64-msvc.node')
-        )
+        localFileExisted = existsSync(join(__dirname, 'zstd.win32-x64-msvc.node'));
         try {
           if (localFileExisted) {
-            nativeBinding = require('./zstd.win32-x64-msvc.node')
+            nativeBinding = require('./zstd.win32-x64-msvc.node');
           } else {
-            nativeBinding = require('@mongodb-js/zstd-win32-x64-msvc')
+            nativeBinding = require('@mongodb-js/zstd-win32-x64-msvc');
           }
         } catch (e) {
-          loadError = e
+          loadError = e;
         }
-        break
+        break;
       case 'arm64':
-        localFileExisted = existsSync(
-          join(__dirname, 'zstd.win32-arm64-msvc.node')
-        )
+        localFileExisted = existsSync(join(__dirname, 'zstd.win32-arm64-msvc.node'));
         try {
           if (localFileExisted) {
-            nativeBinding = require('./zstd.win32-arm64-msvc.node')
+            nativeBinding = require('./zstd.win32-arm64-msvc.node');
           } else {
-            nativeBinding = require('@mongodb-js/zstd-win32-arm64-msvc')
+            nativeBinding = require('@mongodb-js/zstd-win32-arm64-msvc');
           }
         } catch (e) {
-          loadError = e
+          loadError = e;
         }
-        break
+        break;
       default:
-        throw new Error(`Unsupported architecture on Windows: ${arch}`)
+        throw new Error(`Unsupported architecture on Windows: ${arch}`);
     }
-    break
+    break;
   case 'darwin':
     switch (arch) {
       case 'x64':
-        localFileExisted = existsSync(join(__dirname, 'zstd.darwin-x64.node'))
+        localFileExisted = existsSync(join(__dirname, 'zstd.darwin-x64.node'));
         try {
           if (localFileExisted) {
-            nativeBinding = require('./zstd.darwin-x64.node')
+            nativeBinding = require('./zstd.darwin-x64.node');
           } else {
-            nativeBinding = require('@mongodb-js/zstd-darwin-x64')
+            nativeBinding = require('@mongodb-js/zstd-darwin-x64');
           }
         } catch (e) {
-          loadError = e
+          loadError = e;
         }
-        break
+        break;
       case 'arm64':
-        localFileExisted = existsSync(
-          join(__dirname, 'zstd.darwin-arm64.node')
-        )
+        localFileExisted = existsSync(join(__dirname, 'zstd.darwin-arm64.node'));
         try {
           if (localFileExisted) {
-            nativeBinding = require('./zstd.darwin-arm64.node')
+            nativeBinding = require('./zstd.darwin-arm64.node');
           } else {
-            nativeBinding = require('@mongodb-js/zstd-darwin-arm64')
+            nativeBinding = require('@mongodb-js/zstd-darwin-arm64');
           }
         } catch (e) {
-          loadError = e
+          loadError = e;
         }
-        break
+        break;
       default:
-        throw new Error(`Unsupported architecture on macOS: ${arch}`)
+        throw new Error(`Unsupported architecture on macOS: ${arch}`);
     }
-    break
+    break;
   case 'freebsd':
     if (arch !== 'x64') {
-      throw new Error(`Unsupported architecture on FreeBSD: ${arch}`)
+      throw new Error(`Unsupported architecture on FreeBSD: ${arch}`);
     }
-    localFileExisted = existsSync(join(__dirname, 'zstd.freebsd-x64.node'))
+    localFileExisted = existsSync(join(__dirname, 'zstd.freebsd-x64.node'));
     try {
       if (localFileExisted) {
-        nativeBinding = require('./zstd.freebsd-x64.node')
+        nativeBinding = require('./zstd.freebsd-x64.node');
       } else {
-        nativeBinding = require('@mongodb-js/zstd-freebsd-x64')
+        nativeBinding = require('@mongodb-js/zstd-freebsd-x64');
       }
     } catch (e) {
-      loadError = e
+      loadError = e;
     }
-    break
+    break;
   case 'linux':
     switch (arch) {
       case 'x64':
-        localFileExisted = existsSync(
-          join(__dirname, 'zstd.linux-x64-gnu.node')
-        )
+        localFileExisted = existsSync(join(__dirname, 'zstd.linux-x64-gnu.node'));
         try {
           if (localFileExisted) {
-            nativeBinding = require('./zstd.linux-x64-gnu.node')
+            nativeBinding = require('./zstd.linux-x64-gnu.node');
           } else {
-            nativeBinding = require('@mongodb-js/zstd-linux-x64-gnu')
+            nativeBinding = require('@mongodb-js/zstd-linux-x64-gnu');
           }
         } catch (e) {
-          loadError = e
+          loadError = e;
         }
-        break
+        break;
       case 'arm64':
-        localFileExisted = existsSync(
-          join(__dirname, 'zstd.linux-arm64-gnu.node')
-        )
+        localFileExisted = existsSync(join(__dirname, 'zstd.linux-arm64-gnu.node'));
         try {
           if (localFileExisted) {
-            nativeBinding = require('./zstd.linux-arm64-gnu.node')
+            nativeBinding = require('./zstd.linux-arm64-gnu.node');
           } else {
-            nativeBinding = require('@mongodb-js/zstd-linux-arm64-gnu')
+            nativeBinding = require('@mongodb-js/zstd-linux-arm64-gnu');
           }
         } catch (e) {
-          loadError = e
+          loadError = e;
         }
-        break
+        break;
       case 'arm':
-        localFileExisted = existsSync(
-          join(__dirname, 'zstd.linux-arm-gnueabihf.node')
-        )
+        localFileExisted = existsSync(join(__dirname, 'zstd.linux-arm-gnueabihf.node'));
         try {
           if (localFileExisted) {
-            nativeBinding = require('./zstd.linux-arm-gnueabihf.node')
+            nativeBinding = require('./zstd.linux-arm-gnueabihf.node');
           } else {
-            nativeBinding = require('@mongodb-js/zstd-linux-arm-gnueabihf')
+            nativeBinding = require('@mongodb-js/zstd-linux-arm-gnueabihf');
           }
         } catch (e) {
-          loadError = e
+          loadError = e;
         }
-        break
+        break;
       default:
-        throw new Error(`Unsupported architecture on Linux: ${arch}`)
+        throw new Error(`Unsupported architecture on Linux: ${arch}`);
     }
-    break
+    break;
   default:
-    throw new Error(`Unsupported OS: ${platform}, architecture: ${arch}`)
+    throw new Error(`Unsupported OS: ${platform}, architecture: ${arch}`);
 }
 
 if (!nativeBinding) {
   if (loadError) {
-    throw loadError
+    throw loadError;
   }
-  throw new Error(`Failed to load native binding`)
+  throw new Error(`Failed to load native binding`);
 }
 
-const { compress, decompress } = nativeBinding
+const { compress, decompress } = nativeBinding;
 
-module.exports.compress = compress
-module.exports.decompress = decompress
+module.exports.compress = compress;
+module.exports.decompress = decompress;
