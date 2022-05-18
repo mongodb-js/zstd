@@ -13,13 +13,11 @@ npm install @mongodb-js/zstd
 |                  | node12 | node14 | node16 | node17 |
 | ---------------- | ------ | ------ | ------ | ------ |
 | Windows x64      | ✓      | ✓      | ✓      | ✓      |
-| Windows arm64    | ✓      | ✓      | ✓      | ✓      |
 | macOS x64        | ✓      | ✓      | ✓      | ✓      |
 | macOS arm64      | ✓      | ✓      | ✓      | ✓      |
 | Linux x64 gnu    | ✓      | ✓      | ✓      | ✓      |
 | Linux arm gnu    | ✓      | ✓      | ✓      | ✓      |
 | Linux arm64 gnu  | ✓      | ✓      | ✓      | ✓      |
-| FreeBSD x64      | ✓      | ✓      | ✓      | ✓      |
 
 ## API
 
