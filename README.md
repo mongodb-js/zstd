@@ -12,7 +12,7 @@ npm install @mongodb-js/zstd
 
 ## Support matrix
 
-|                  | node12 | node14 | node16 | node17 |
+|                  | node12 | node14 | node16 | node18 |
 | ---------------- | ------ | ------ | ------ | ------ |
 | Windows x64      | ✓      | ✓      | ✓      | ✓      |
 | macOS x64        | ✓      | ✓      | ✓      | ✓      |
