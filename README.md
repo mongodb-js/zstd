@@ -64,6 +64,6 @@ import { compress, decompress } from '@mongodb-js/zstd';
 CI will automatically publish when it detects a new release after:
 
 ```
-npm run release
+npm run release -- --release-as <patch|minor|major>
 git push --follow-tags origin main
 ```
