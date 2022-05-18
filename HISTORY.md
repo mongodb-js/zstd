@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.6](https://github.com/mongodb-js/zstd/compare/v0.0.5...v0.0.6) (2022-05-18)
+
+
+### Features
+
+* add readme ([833aa92](https://github.com/mongodb-js/zstd/commit/833aa92213236ef35c4bd79d4c462751a3b4e634))
+* update readme ([49ac44e](https://github.com/mongodb-js/zstd/commit/49ac44efbe9a4ab544958b97ae178b51cac057ff))
+
 ### [0.0.5](https://github.com/mongodb-js/zstd/compare/v0.0.4...v0.0.5) (2022-05-09)
 
 
