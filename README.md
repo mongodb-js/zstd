@@ -56,3 +56,16 @@ import { compress, decompress } from '@mongodb-js/zstd';
   const decompressed = await decompress(compressed);
 })();
 ```
+
+## Running Tests
+
+`npm test`
+
+## Releasing
+
+CI will automatically publish when it detects a new release after:
+
+```
+npm run release
+git push --follow-tags origin main
+```
