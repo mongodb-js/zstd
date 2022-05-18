@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.7](https://github.com/mongodb-js/zstd/compare/v0.0.6...v0.0.7) (2022-05-18)
+
+
+### Bug Fixes
+
+* fix macos arm64 build ([#9](https://github.com/mongodb-js/zstd/issues/9)) ([1ebefde](https://github.com/mongodb-js/zstd/commit/1ebefdedb761b34bcc721a934296d3ac9f0e7a1b))
+
 ### [0.0.6](https://github.com/mongodb-js/zstd/compare/v0.0.5...v0.0.6) (2022-05-18)
 
 
