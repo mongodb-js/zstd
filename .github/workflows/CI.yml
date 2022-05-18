@@ -36,12 +36,11 @@ jobs:
           - host: ubuntu-latest
             target: x86_64-unknown-linux-gnu
             architecture: x64
-            docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-alpine-zig
-            build: >-
-              set -e &&
-              rustup target add x86_64-unknown-linux-gnu &&
-              npm run build --target x86_64-unknown-linux-gnu --zig --zig-abi-suffix 2.12 &&
-              llvm-strip -x *.node
+            docker: |
+              docker pull $DOCKER_REGISTRY_URL/napi-rs/napi-rs/nodejs-rust:lts-debian
+              docker tag $DOCKER_REGISTRY_URL/napi-rs/napi-rs/nodejs-rust:lts-debian builder
+            build: |
+              docker run --rm -v ~/.cargo/git:/root/.cargo/git -v ~/.cargo/registry:/root/.cargo/registry -v $(pwd):/build -w /build builder npm run build && strip *.node
           - host: macos-latest
             target: aarch64-apple-darwin
             build: |
@@ -50,12 +49,12 @@ jobs:
           - host: ubuntu-latest
             architecture: x64
             target: aarch64-unknown-linux-gnu
-            docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-alpine-zig
-            build: >-
-              set -e &&
-              rustup target add aarch64-unknown-linux-gnu &&
-              npm run build --target aarch64-unknown-linux-gnu --zig --zig-abi-suffix 2.17 &&
-              llvm-strip -x *.node
+            setup: |
+              sudo apt-get update
+              sudo apt-get install g++-aarch64-linux-gnu gcc-aarch64-linux-gnu -y
+            build: |
+              npm run build --target=aarch64-unknown-linux-gnu
+              aarch64-linux-gnu-strip *.node
     name: stable - ${{ matrix.settings.target }} - node@16
     runs-on: ${{ matrix.settings.host }}
     steps:
