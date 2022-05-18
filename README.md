@@ -1,5 +1,7 @@
 # @mongodb-js/zstd
 
+[![CI](https://github.com/mongodb-js/zstd/actions/workflows/CI.yml/badge.svg)](https://github.com/mongodb-js/zstd/actions/workflows/CI.yml)
+
 Zstandard compression library for Node.js
 
 ## Installation
