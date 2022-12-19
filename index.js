@@ -7,6 +7,20 @@ let nativeBinding = null;
 let localFileExisted = false;
 let loadError = null;
 
+function isMusl() {
+  // For Node 10
+  if (!process.report || typeof process.report.getReport !== 'function') {
+    try {
+      return readFileSync('/usr/bin/ldd', 'utf8').includes('musl');
+    } catch (e) {
+      return true;
+    }
+  } else {
+    const { glibcVersionRuntime } = process.report.getReport().header;
+    return !glibcVersionRuntime;
+  }
+}
+
 switch (platform) {
   case 'win32':
     switch (arch) {
@@ -59,27 +73,53 @@ switch (platform) {
   case 'linux':
     switch (arch) {
       case 'x64':
-        localFileExisted = existsSync(join(__dirname, 'zstd.linux-x64-gnu.node'));
-        try {
-          if (localFileExisted) {
-            nativeBinding = require('./zstd.linux-x64-gnu.node');
-          } else {
-            nativeBinding = require('@mongodb-js/zstd-linux-x64-gnu');
+        if (isMusl()) {
+          localFileExisted = existsSync(join(__dirname, 'zstd.linux-x64-musl.node'));
+          try {
+            if (localFileExisted) {
+              nativeBinding = require('./zstd.linux-x64-musl.node');
+            } else {
+              nativeBinding = require('@mongodb-js/zstd-linux-x64-musl');
+            }
+          } catch (e) {
+            loadError = e;
           }
-        } catch (e) {
-          loadError = e;
+        } else {
+          localFileExisted = existsSync(join(__dirname, 'zstd.linux-x64-gnu.node'));
+          try {
+            if (localFileExisted) {
+              nativeBinding = require('./zstd.linux-x64-gnu.node');
+            } else {
+              nativeBinding = require('@mongodb-js/zstd-linux-x64-gnu');
+            }
+          } catch (e) {
+            loadError = e;
+          }
         }
         break;
       case 'arm64':
-        localFileExisted = existsSync(join(__dirname, 'zstd.linux-arm64-gnu.node'));
-        try {
-          if (localFileExisted) {
-            nativeBinding = require('./zstd.linux-arm64-gnu.node');
-          } else {
-            nativeBinding = require('@mongodb-js/zstd-linux-arm64-gnu');
+        if (isMusl()) {
+          localFileExisted = existsSync(join(__dirname, 'zstd.linux-arm64-musl.node'));
+          try {
+            if (localFileExisted) {
+              nativeBinding = require('./zstd.linux-arm64-musl.node');
+            } else {
+              nativeBinding = require('@mongodb-js/zstd-linux-arm64-musl');
+            }
+          } catch (e) {
+            loadError = e;
           }
-        } catch (e) {
-          loadError = e;
+        } else {
+          localFileExisted = existsSync(join(__dirname, 'zstd.linux-arm64-gnu.node'));
+          try {
+            if (localFileExisted) {
+              nativeBinding = require('./zstd.linux-arm64-gnu.node');
+            } else {
+              nativeBinding = require('@mongodb-js/zstd-linux-arm64-gnu');
+            }
+          } catch (e) {
+            loadError = e;
+          }
         }
         break;
       case 'arm':
