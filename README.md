@@ -20,12 +20,14 @@ npm install @mongodb-js/zstd
 | Linux x64 gnu    | ✓      | ✓      | ✓      | ✓      |
 | Linux arm gnu    | ✓      | ✓      | ✓      | ✓      |
 | Linux arm64 gnu  | ✓      | ✓      | ✓      | ✓      |
+| Linux x64 musl   | ✓      | ✓      | ✓      | ✓      |
+| Linux arm64 musl | ✓      | ✓      | ✓      | ✓      |
 
 ## API
 
 ```ts
-export function compress(buffer: Buffer | ArrayBuffer | Uint8Array, level: number): Promise<Buffer>
-export function decompress(buffer: Buffer): Promise<Buffer>
+export function compress(buffer: Buffer | ArrayBuffer | Uint8Array, level: number): Promise<Buffer>;
+export function decompress(buffer: Buffer): Promise<Buffer>;
 ```
 
 ### Bugs / Feature Requests
