@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/mongodb-js/zstd/compare/v1.0.0...v1.1.0) (2023-01-23)
+
+
+### Features
+
+* **NODE-4569:** add "musl" builds for Alpine Linux ([#12](https://github.com/mongodb-js/zstd/issues/12)) ([b3dedc3](https://github.com/mongodb-js/zstd/commit/b3dedc31a274df1eecb54b9092c8dd270f31c21c))
+
 ## [1.0.0](https://github.com/mongodb-js/zstd/compare/v0.0.7...v1.0.0) (2022-05-18)
 
 ### [0.0.7](https://github.com/mongodb-js/zstd/compare/v0.0.6...v0.0.7) (2022-05-18)
