@@ -12,16 +12,16 @@ npm install @mongodb-js/zstd
 
 ## Support matrix
 
-|                  | node14 | node16 | node18 | node20 |
-| ---------------- | ------ | ------ | ------ | ------ |
-| Windows x64      | ✓      | ✓      | ✓      | ✓      |
-| macOS x64        | ✓      | ✓      | ✓      | ✓      |
-| macOS arm64      | ✓      | ✓      | ✓      | ✓      |
-| Linux x64 gnu    | ✓      | ✓      | ✓      | ✓      |
-| Linux arm gnu    | ✓      | ✓      | ✓      | ✓      |
-| Linux arm64 gnu  | ✓      | ✓      | ✓      | ✓      |
-| Linux x64 musl   | ✓      | ✓      | ✓      | ✓      |
-| Linux arm64 musl | ✓      | ✓      | ✓      | ✓      |
+|                  | node12 | node14 | node16 | node18 | node20 |
+| ---------------- | ------ | ------ | ------ | ------ | ------ |
+| Windows x64      | ✓      | ✓      | ✓      | ✓      | ✓      |
+| macOS x64        | ✓      | ✓      | ✓      | ✓      | ✓      |
+| macOS arm64      | ✓      | ✓      | ✓      | ✓      | ✓      |
+| Linux x64 gnu    | ✓      | ✓      | ✓      | ✓      | ✓      |
+| Linux arm gnu    | ✓      | ✓      | ✓      | ✓      | ✓      |
+| Linux arm64 gnu  | ✓      | ✓      | ✓      | ✓      | ✓      |
+| Linux x64 musl   | ✓      | ✓      | ✓      | ✓      | ✓      |
+| Linux arm64 musl | ✓      | ✓      | ✓      | ✓      | ✓      |
 
 ## API
 
