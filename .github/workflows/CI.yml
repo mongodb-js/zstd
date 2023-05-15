@@ -74,14 +74,14 @@ jobs:
               rustup target add aarch64-unknown-linux-musl &&
               npm run build -- --target aarch64-unknown-linux-musl &&
               /aarch64-linux-musl-cross/bin/aarch64-linux-musl-strip *.node
-    name: stable - ${{ matrix.settings.target }} - node@16
+    name: stable - ${{ matrix.settings.target }} - node@20
     runs-on: ${{ matrix.settings.host }}
     steps:
       - uses: actions/checkout@v3
       - name: Setup node
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 20
           check-latest: true
           cache: npm
           architecture: ${{ matrix.settings.architecture }}
@@ -152,6 +152,7 @@ jobs:
           - '14'
           - '16'
           - '18'
+          - '20'
     runs-on: ${{ matrix.settings.host }}
     steps:
       - uses: actions/checkout@v3
@@ -190,6 +191,7 @@ jobs:
           - '14'
           - '16'
           - '18'
+          - '20'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -228,6 +230,7 @@ jobs:
           - '14'
           - '16'
           - '18'
+          - '20'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -266,6 +269,7 @@ jobs:
           - '14'
           - '16'
           - '18'
+          - '20'
     runs-on: ubuntu-latest
     steps:
       - run: docker run --rm --privileged multiarch/qemu-user-static:register --reset
@@ -285,11 +289,17 @@ jobs:
           key: npm-cache-test-linux-aarch64-gnu-${{ matrix.node }}-${{ hashFiles('package-lock.json') }}
       - name: Install dependencies
         run: npm clean-install --ignore-scripts
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+        with:
+          platforms: arm64
+      - name: Run Emulator
+        run: docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
       - name: Setup and run tests
         uses: addnab/docker-run-action@v3
         with:
-          image: ghcr.io/napi-rs/napi-rs/nodejs:aarch64-${{ matrix.node }}
-          options: '-v ${{ github.workspace }}:/build -w /build'
+          image: node:${{ matrix.node }}-slim
+          options: '--platform linux/arm64 -v ${{ github.workspace }}:/build -w /build'
           run: |
             set -e
             npm test
