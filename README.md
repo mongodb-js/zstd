@@ -10,7 +10,7 @@ Zstandard compression library for Node.js
 npm install @mongodb-js/zstd
 ```
 
-## Support matrix
+## OS Support matrix
 
 |                  | node12 | node14 | node16 | node18 | node20 |
 | ---------------- | ------ | ------ | ------ | ------ | ------ |
@@ -22,6 +22,17 @@ npm install @mongodb-js/zstd
 | Linux arm64 gnu  | ✓      | ✓      | ✓      | ✓      | ✓      |
 | Linux x64 musl   | ✓      | ✓      | ✓      | ✓      | ✓      |
 | Linux arm64 musl | ✓      | ✓      | ✓      | ✓      | ✓      |
+
+## MongoDB Node.js Driver Version Compatibility
+
+Only the following version combinations with the [MongoDB Node.js Driver](https://github.com/mongodb/node-mongodb-native) are considered stable.
+
+|               | `@mongodb-js/zstd@1.x` |
+| ------------- | ---------------------- |
+| `mongodb@6.x` | ✓ _(^1.1.0)_           |
+| `mongodb@5.x` | ✓                      |
+| `mongodb@4.x` | ✓                      |
+| `mongodb@3.x` | N/A                    |
 
 ## API
 
