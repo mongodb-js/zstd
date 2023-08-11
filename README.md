@@ -29,7 +29,7 @@ Only the following version combinations with the [MongoDB Node.js Driver](https:
 
 |               | `@mongodb-js/zstd@1.x` |
 | ------------- | ---------------------- |
-| `mongodb@6.x` | ✓ _(^1.1.0)_           |
+| `mongodb@6.x` | ✓ `^1.1.0`           |
 | `mongodb@5.x` | ✓                      |
 | `mongodb@4.x` | ✓                      |
 | `mongodb@3.x` | N/A                    |
