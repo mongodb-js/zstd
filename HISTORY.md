@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/mongodb-js/zstd/compare/v1.1.0...v1.2.0) (2023-08-29)
+
+
+### Bug Fixes
+
+* **NODE-5177:** update to latest zstd-sys ([#15](https://github.com/mongodb-js/zstd/issues/15)) ([6b6d8ce](https://github.com/mongodb-js/zstd/commit/6b6d8ce098de757c53fd52a09d47aa3e29ed2902))
+
 ## [1.1.0](https://github.com/mongodb-js/zstd/compare/v1.0.0...v1.1.0) (2023-01-23)
 
 
