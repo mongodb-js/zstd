@@ -1,0 +1,220 @@
+{
+  "components": [
+    {
+      "bom-ref": "pkg:cargo/futures@0.3",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://crates.io/api/v1/crates/futures/0.3/download"
+        },
+        {
+          "type": "vcs",
+          "url": "https://github.com/rust-lang/futures-rs"
+        },
+        {
+          "type": "website",
+          "url": "https://crates.io/crates/futures/0.3"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Apache-2.0"
+          }
+        },
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ],
+      "name": "futures",
+      "purl": "pkg:cargo/futures@0.3",
+      "type": "library",
+      "version": "0.3"
+    },
+    {
+      "bom-ref": "pkg:cargo/napi@2.4.3",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://crates.io/api/v1/crates/napi/2.4.3/download"
+        },
+        {
+          "type": "vcs",
+          "url": "https://github.com/napi-rs/napi-rs"
+        },
+        {
+          "type": "website",
+          "url": "https://crates.io/crates/napi/2.4.3"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ],
+      "name": "napi",
+      "purl": "pkg:cargo/napi@2.4.3",
+      "type": "library",
+      "version": "2.4.3"
+    },
+    {
+      "bom-ref": "pkg:cargo/napi-derive@2.4.1",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://crates.io/api/v1/crates/napi-derive/2.4.1/download"
+        },
+        {
+          "type": "vcs",
+          "url": "https://github.com/napi-rs/napi-rs"
+        },
+        {
+          "type": "website",
+          "url": "https://crates.io/crates/napi-derive/2.4.1"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ],
+      "name": "napi-derive",
+      "purl": "pkg:cargo/napi-derive@2.4.1",
+      "type": "library",
+      "version": "2.4.1"
+    },
+    {
+      "bom-ref": "pkg:cargo/zstd@0.11",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://crates.io/api/v1/crates/zstd/0.11/download"
+        },
+        {
+          "type": "vcs",
+          "url": "https://github.com/gyscos/zstd-rs"
+        },
+        {
+          "type": "website",
+          "url": "https://crates.io/crates/zstd/0.11"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ],
+      "name": "zstd",
+      "purl": "pkg:cargo/zstd@0.11",
+      "type": "library",
+      "version": "0.11"
+    },
+    {
+      "bom-ref": "pkg:cargo/zstd-sys@2.0.8",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://crates.io/api/v1/crates/zstd-sys/2.0.8/download"
+        },
+        {
+          "type": "vcs",
+          "url": "https://github.com/gyscos/zstd-rs"
+        },
+        {
+          "type": "website",
+          "url": "https://crates.io/crates/zstd-sys/2.0.8"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Apache-2.0"
+          }
+        },
+        {
+          "license": {
+            "name": "MIT"
+          }
+        }
+      ],
+      "name": "zstd-sys",
+      "purl": "pkg:cargo/zstd-sys@2.0.8",
+      "type": "library",
+      "version": "2.0.8"
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "pkg:cargo/futures@0.3"
+    },
+    {
+      "ref": "pkg:cargo/napi-derive@2.4.1"
+    },
+    {
+      "ref": "pkg:cargo/napi@2.4.3"
+    },
+    {
+      "ref": "pkg:cargo/zstd-sys@2.0.8"
+    },
+    {
+      "ref": "pkg:cargo/zstd@0.11"
+    }
+  ],
+  "metadata": {
+    "timestamp": "2024-05-01T21:03:39.164915+00:00",
+    "tools": [
+      {
+        "externalReferences": [
+          {
+            "type": "build-system",
+            "url": "https://github.com/CycloneDX/cyclonedx-python-lib/actions"
+          },
+          {
+            "type": "distribution",
+            "url": "https://pypi.org/project/cyclonedx-python-lib/"
+          },
+          {
+            "type": "documentation",
+            "url": "https://cyclonedx-python-library.readthedocs.io/"
+          },
+          {
+            "type": "issue-tracker",
+            "url": "https://github.com/CycloneDX/cyclonedx-python-lib/issues"
+          },
+          {
+            "type": "license",
+            "url": "https://github.com/CycloneDX/cyclonedx-python-lib/blob/main/LICENSE"
+          },
+          {
+            "type": "release-notes",
+            "url": "https://github.com/CycloneDX/cyclonedx-python-lib/blob/main/CHANGELOG.md"
+          },
+          {
+            "type": "vcs",
+            "url": "https://github.com/CycloneDX/cyclonedx-python-lib"
+          },
+          {
+            "type": "website",
+            "url": "https://github.com/CycloneDX/cyclonedx-python-lib/#readme"
+          }
+        ],
+        "name": "cyclonedx-python-lib",
+        "vendor": "CycloneDX",
+        "version": "6.4.4"
+      }
+    ]
+  },
+  "serialNumber": "urn:uuid:a8980ce9-1205-4b26-bed3-a0ad798988a6",
+  "version": 1,
+  "$schema": "http://cyclonedx.org/schema/bom-1.5.schema.json",
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5"
+}
