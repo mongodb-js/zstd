@@ -28,8 +28,7 @@
     "@napi-rs/cli": "^2.18.2",
     "chai": "^4.4.1",
     "mocha": "^10.4.0",
-    "prettier": "^3.2.5",
-    "standard-version": "^9.5.0"
+    "prettier": "^3.2.5"
   },
   "engines": {
     "node": ">= 10"

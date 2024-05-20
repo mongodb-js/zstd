@@ -3,7 +3,7 @@ env:
   DEBUG: napi:*
   APP_NAME: zstd
   MACOSX_DEPLOYMENT_TARGET: '10.13'
-'on':
+on:
   push:
     branches:
       - main
@@ -18,7 +18,6 @@ env:
   pull_request: null
 jobs:
   build:
-    if: "!contains(github.event.head_commit.message, 'skip ci')"
     strategy:
       fail-fast: false
       matrix:
@@ -346,44 +345,37 @@ jobs:
       - test-linux-aarch64-gnu-binding
       - test-linux-aarch64-musl-binding
     steps:
-      - uses: actions/checkout@v3
-      - name: Setup node
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
         with:
-          node-version: 16
-          check-latest: true
-          cache: npm
-      - name: Cache NPM dependencies
-        uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: npm-cache-ubuntu-latest-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            npm-cache-
-      - name: Install dependencies
-        run: npm clean-install --ignore-scripts
+          node-version: 'lts/*'
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - run: npm install -g npm@latest
+        shell: bash
+
+      - run: npm clean-install
+        shell: bash
+
       - name: Download all artifacts
         uses: actions/download-artifact@v3
         with:
           path: artifacts
+
       - name: Move artifacts
         run: npm run artifacts
+
       - name: List packages
         run: ls -R ./npm
         shell: bash
-      - name: Publish
-        run: |
-          if git log -1 --pretty=%B | grep "^chore(release): [0-9]\+\.[0-9]\+\.[0-9]\+$";
-          then
-            echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-            npm publish --access public
-          elif git log -1 --pretty=%B | grep "^chore(release): [0-9]\+\.[0-9]\+\.[0-9]\+";
-          then
-            echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-            npm publish --tag next --access public
-          else
-            echo "Not a release, skipping publish"
-          fi
+
+      - id: release
+        uses: googleapis/release-please-action@v4
+
+      - if: ${{ steps.release.outputs.release_created }}
+        run: npm publish --provenance
         env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
