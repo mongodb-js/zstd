@@ -1,3 +1,5 @@
+This is Notion's fork of @mongodb-js/zstd. Currently, the only change from upstream is this sentence.
+
 # @mongodb-js/zstd
 
 [![CI](https://github.com/mongodb-js/zstd/actions/workflows/CI.yml/badge.svg)](https://github.com/mongodb-js/zstd/actions/workflows/CI.yml)
