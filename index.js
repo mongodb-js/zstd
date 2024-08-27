@@ -151,5 +151,19 @@ if (!nativeBinding) {
 
 const { compress, decompress } = nativeBinding;
 
-module.exports.compress = compress;
-module.exports.decompress = decompress;
+// Error objects created via napi don't have JS stacks; wrap them so .stack is present
+// https://github.com/nodejs/node/issues/25318#issuecomment-451068073
+module.exports.compress = async function (data) {
+  try {
+    return await compress(data);
+  } catch (e) {
+    throw new Error(`zstd: ${e.message}`);
+  }
+};
+module.exports.decompress = async function (data) {
+  try {
+    return await decompress(data);
+  } catch (e) {
+    throw new Error(`zstd: ${e.message}`);
+  }
+};
