@@ -20,6 +20,7 @@
     }
   },
   "files": [
+    "bindings.js",
     "index.d.ts",
     "index.js"
   ],
@@ -44,8 +45,8 @@
   },
   "scripts": {
     "artifacts": "napi artifacts",
-    "build": "napi build --platform --release",
-    "build:debug": "napi build --platform",
+    "build": "napi build --js bindings.js --platform --release",
+    "build:debug": "napi build --js bindings.js --platform",
     "format:js": "prettier --config ./package.json --write *.js",
     "format:rs": "cargo fmt",
     "prepublishOnly": "napi prepublish -t npm",
