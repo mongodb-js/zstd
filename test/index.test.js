@@ -37,4 +37,17 @@ describe('zstd', () => {
       });
     });
   });
+
+  describe('#decompress', () => {
+    context('when decompressing invalid data', () => {
+      it('includes a stack trace', async () => {
+        try {
+          await decompress(Buffer.from('invalid'));
+        } catch (error) {
+          expect(error.message).to.equal('zstd: Unknown frame descriptor');
+          expect(error.stack).to.match(/at decompress/);
+        }
+      });
+    });
+  });
 });
