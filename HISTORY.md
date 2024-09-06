@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.1](https://github.com/mongodb-js/zstd/compare/v1.2.0...v1.2.1) (2024-09-06)
+
+
+### Bug Fixes
+
+* **NODE-6348:** Wrap thrown errors in JS Error objects with stacks ([#25](https://github.com/mongodb-js/zstd/issues/25)) ([af62c4f](https://github.com/mongodb-js/zstd/commit/af62c4f5f816386ce605c20641ad30cc74bb77e2))
+
 ## [1.2.0](https://github.com/mongodb-js/zstd/compare/v1.1.0...v1.2.0) (2023-08-29)
 
 
