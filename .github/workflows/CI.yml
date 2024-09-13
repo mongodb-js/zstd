@@ -27,7 +27,7 @@ jobs:
             target: x86_64-apple-darwin
             architecture: x64
             build: |
-              npm run build
+              npm run build -- --target x86_64-apple-darwin
               strip -x *.node
           - host: windows-latest
             build: npm run build
