@@ -1,4 +1,4 @@
-const { compress: _compress, decompress: _decompress } = require('./bindings');
+const { compress: _compress, decompress: _decompress } = require('bindings')('zstd');
 
 // Error objects created via napi don't have JS stacks; wrap them so .stack is present
 // https://github.com/nodejs/node/issues/25318#issuecomment-451068073
