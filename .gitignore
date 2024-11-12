@@ -7,7 +7,6 @@ lib-cov
 *.pid
 *.gz
 *.node
-target/
 .DS_Store
 
 .vscode
@@ -19,4 +18,3 @@ node_modules
 build
 
 npm-debug.log
-Cargo.lock
