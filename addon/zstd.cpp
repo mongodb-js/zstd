@@ -1,3 +1,5 @@
+#include "zstd.h"
+
 #include <napi.h>
 
 #include <string>
@@ -7,7 +9,6 @@
 #include "compressor.h"
 #include "decompressor.h"
 #include "napi_utils.h"
-#include "zstd.h"
 
 using namespace Napi;
 
@@ -51,4 +52,4 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
     return exports;
 }
 
-NODE_API_MODULE(hello, Init)
+NODE_API_MODULE(zstd, Init)

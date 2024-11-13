@@ -32,7 +32,7 @@
     "prepare": "npm run compile",
     "compile": "node-gyp rebuild",
     "test": "mocha test/index.test.js",
-    "check:eslint": "ESLINT_USE_FLAT_CONFIG=false eslint . .*.json",
+    "check:eslint": "ESLINT_USE_FLAT_CONFIG=false eslint *ts lib/ .*.json",
     "clang-format": "clang-format --style=file:.clang-format --Werror -i addon/*",
     "check:clang-format": "clang-format --style=file:.clang-format --dry-run --Werror addon/*"
   },

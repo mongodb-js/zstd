@@ -1,5 +1,5 @@
 const { describe, test } = require('mocha');
-const { compress, decompress } = require('../index');
+const { compress, decompress } = require('../lib/index');
 
 const zstdLegacy = require('@mongodb-js/zstd');
 const { expect } = require('chai');
