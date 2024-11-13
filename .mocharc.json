@@ -1,9 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/mocharc.json",
-  "require": ["source-map-support/register", "test/tools/chai-addons.js"],
   "extension": ["ts"],
   "recursive": true,
   "failZero": true,
-  "reporter": "test/tools/mongodb_reporter.js",
   "color": true
 }
