@@ -1,0 +1,19 @@
+ARG UBUNTU_VERSION=bionic
+FROM ubuntu:${UBUNTU_VERSION} AS build
+
+ARG NODE_VERSION=16.20.1
+# Possible values: s390x, arm64, x64
+ARG NODE_ARCH
+ADD https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-${NODE_ARCH}.tar.gz /
+RUN mkdir -p /nodejs && tar -xzf /node-v${NODE_VERSION}-linux-${NODE_ARCH}.tar.gz --strip-components=1 -C /nodejs
+ENV PATH=$PATH:/nodejs/bin
+
+WORKDIR /tmp
+COPY . .
+
+RUN apt-get -qq update && apt-get -qq install -y python3 build-essential && ldd --version
+
+RUN bash etc/install-zstd.sh && npm install && npm i @mongodb-js/zstd
+
+ARG RUN_TEST
+RUN [ -n "$RUN_TEST" ] && npm run test || echo 'skipping testing!'
