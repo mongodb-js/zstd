@@ -11,6 +11,7 @@ describe('zstd', () => {
     expect(await decompress()).to.deep.equal('decompress()');
   });
 
+  // actual tests are skipped for now until the C++ compression logic is written.
   describe.skip('#compress', () => {
     const buffer = Buffer.from('test');
 

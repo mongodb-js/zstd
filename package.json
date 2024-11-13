@@ -10,9 +10,7 @@
   ],
   "dependencies": {
     "bindings": "^1.5.0",
-    "chai-subset": "^1.6.0",
-    "node-addon-api": "^8.1.0",
-    "sinon-chai": "^3.7.0"
+    "node-addon-api": "^8.1.0"
   },
   "license": "Apache-2.0",
   "devDependencies": {
@@ -22,6 +20,8 @@
     "mocha": "^10.8.2",
     "prettier": "^3.3.3",
     "clang-format": "^1.8.0",
+    "sinon-chai": "^3.7.0",
+    "chai-subset": "^1.6.0",
     "eslint": "^9.14.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
