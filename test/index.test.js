@@ -1,6 +1,5 @@
 const { expect } = require('chai');
-const { compress, decompress } = require('../index');
-const { describe, it } = require('mocha');
+const { compress, decompress } = require('../lib/index');
 
 describe('zstd', () => {
   it('compress() works', async function () {

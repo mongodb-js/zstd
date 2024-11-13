@@ -13,3 +13,4 @@ NamespaceIndentation: None
 SpaceBeforeAssignmentOperators: true
 Standard: Cpp11
 UseTab: Never
+InsertNewlineAtEOF: true

@@ -13,7 +13,7 @@ jobs:
       matrix:
         # os: [macos-latest, windows-2019]
         os: ['ubuntu-latest']
-        node: [16.x, 18.x, 20.x, 22.x]
+        node: [16.20.1, 18.x, 20.x, 22.x]  
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
