@@ -21,26 +21,7 @@ updates:
         versions: [">=16.0.0"]
       # we ignore TS as a part of quarterly dependency updates.
       - dependency-name: "typescript"
-      # changes to the CLI change the auto generated output
-      # we maintain the generated output explicitly, so we cannot
-      # upgrade without also manually updating this file.
-      - dependency-name: "@napi-rs/cli"
     allow:
-      - dependency-type: "development"
-      
-    groups:
-      development-dependencies:
-        dependency-type: "development"
-        applies-to: version-updates
-        update-types:
-        - "minor"
-        - "patch"
-
-  - package-ecosystem: "cargo" # See documentation for possible values
-    directory: "/" # Location of package manifests
-    schedule:
-      interval: "monthly"
-    allow: 
       - dependency-type: "development"
       
     groups:

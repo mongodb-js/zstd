@@ -4,29 +4,12 @@
   "main": "index.js",
   "types": "index.d.ts",
   "repository": "https://github.com/mongodb-js/zstd",
-  "napi": {
-    "name": "zstd",
-    "package": {
-      "name": "@mongodb-js/zstd"
-    },
-    "triples": {
-      "defaults": true,
-      "additional": [
-        "aarch64-apple-darwin",
-        "aarch64-unknown-linux-gnu",
-        "aarch64-unknown-linux-musl",
-        "x86_64-unknown-linux-musl"
-      ]
-    }
-  },
   "files": [
-    "bindings.js",
     "index.d.ts",
     "index.js"
   ],
   "license": "Apache-2.0",
   "devDependencies": {
-    "@napi-rs/cli": "^2.18.2",
     "chai": "^4.5.0",
     "mocha": "^10.8.2",
     "prettier": "^3.3.3",
@@ -35,23 +18,6 @@
   "engines": {
     "node": ">= 10"
   },
-  "prettier": {
-    "printWidth": 100,
-    "tabWidth": 2,
-    "semi": true,
-    "trailingComma": "none",
-    "singleQuote": true,
-    "arrowParens": "avoid"
-  },
   "scripts": {
-    "artifacts": "napi artifacts",
-    "build": "napi build --js bindings.js --platform --release",
-    "build:debug": "napi build --js bindings.js --platform",
-    "format:js": "prettier --config ./package.json --write *.js",
-    "format:rs": "cargo fmt",
-    "prepublishOnly": "napi prepublish -t npm",
-    "release": "standard-version -i HISTORY.md",
-    "test": "mocha --recursive test/",
-    "version": "napi version"
   }
 }
