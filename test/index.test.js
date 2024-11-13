@@ -1,62 +1,70 @@
+const { describe, test } = require('mocha');
+const { compress, decompress } = require('../index');
+
+const zstdLegacy = require('@mongodb-js/zstd');
 const { expect } = require('chai');
-const { compress, decompress } = require('../lib/index');
 
-describe('zstd', () => {
-  it('compress() works', async function () {
-    expect(await compress()).to.deep.equal('compress()');
+describe('compat tests', function () {
+  describe('old compress, new decompress', testSuite(zstdLegacy.decompress, compress));
+  describe('new compress, decompress', testSuite(decompress, zstdLegacy.compress));
+  describe('new compress, new decompress', testSuite(decompress, compress));
+});
+
+describe('decompress', function () {
+  test('decompress() throws a TypeError', async function () {
+    expect(await decompress().catch(e => e))
+      .to.be.instanceOf(TypeError)
+      .to.match(/must be a buffer/i);
   });
 
-  it('decompress() works', async function () {
-    expect(await decompress()).to.deep.equal('decompress()');
-  });
-
-  // actual tests are skipped for now until the C++ compression logic is written.
-  describe.skip('#compress', () => {
-    const buffer = Buffer.from('test');
-
-    context('when not providing a compression level', () => {
-      it('returns a compressed buffer', async () => {
-        const result = await compress(buffer);
-        expect(await decompress(result)).to.deep.equal(buffer);
-      });
-    });
-
-    context('when providing a compression level', () => {
-      context('when the level is valid', () => {
-        it('returns a compressed buffer', async () => {
-          const result = await compress(buffer, 1);
-          expect(await decompress(result)).to.deep.equal(buffer);
-        });
-      });
-
-      context('when the level is invalid', () => {
-        context('when the level is too high', () => {
-          it('returns a compressed buffer', async () => {
-            const result = await compress(buffer, 100);
-            expect(await decompress(result)).to.deep.equal(buffer);
-          });
-        });
-
-        context('when the level is too low', () => {
-          it('returns a compressed buffer', async () => {
-            const result = await compress(buffer, -100);
-            expect(await decompress(result)).to.deep.equal(buffer);
-          });
-        });
-      });
-    });
-  });
-
-  describe.skip('#decompress', () => {
-    context('when decompressing invalid data', () => {
-      it('includes a stack trace', async () => {
-        try {
-          await decompress(Buffer.from('invalid'));
-        } catch (error) {
-          expect(error.message).to.equal('zstd: Unknown frame descriptor');
-          expect(error.stack).to.match(/at decompress/);
-        }
-      });
-    });
+  test('decompress() returns a Nodejs buffer', async function () {
+    const compressed = await zstdLegacy.compress(Buffer.from([1, 2, 3]));
+    expect(await decompress(compressed)).to.be.instanceOf(Buffer);
   });
 });
+
+describe('compress', function () {
+  test('compress() throws a TypeError', async function () {
+    expect(await compress().catch(e => e))
+      .to.be.instanceOf(TypeError)
+      .to.match(/must be a buffer/i);
+  });
+
+  test('compress() returns a Nodejs buffer', async function () {
+    expect(await compress(Buffer.from([1, 2, 3]))).to.be.instanceOf(Buffer);
+  });
+});
+
+/**
+ * @param {import('../index').decompress} decompress
+ * @param {import('../index').compress} compress
+ */
+function testSuite(decompress, compress) {
+  return function () {
+    test('empty', async function () {
+      const input = Buffer.from('', 'utf8');
+      const result = await decompress(await compress(input));
+      expect(result.toString('utf8')).to.deep.equal('');
+    });
+
+    test('one element', async function () {
+      const input = Buffer.from('a', 'utf8');
+      const result = Buffer.from(await decompress(await compress(input)));
+      expect(result.toString('utf8')).to.deep.equal('a');
+    });
+
+    test('typical length string', async function () {
+      const input = Buffer.from('hello, world! my name is bailey', 'utf8');
+      const result = Buffer.from(await decompress(await compress(input)));
+      expect(result.toString('utf8')).to.deep.equal('hello, world! my name is bailey');
+    });
+
+    test('huge array', async function () {
+      const input_expected = Array.from({ length: 1_000 }, () => 'a').join('');
+      const input = Buffer.from(input_expected, 'utf8');
+
+      const result = Buffer.from(await decompress(await compress(input)));
+      expect(result.toString('utf8')).to.deep.equal(input_expected);
+    });
+  };
+}
