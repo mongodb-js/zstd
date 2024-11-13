@@ -8,8 +8,6 @@
     ],
     'variables': {
       'ARCH': '<(host_arch)',
-      'libmongocrypt_link_type%': 'static',
-      'mongocrypt_avoid_openssl_crypto%': 'false',
       'built_with_electron%': 0
     },
     'sources': [
