@@ -29,7 +29,7 @@ jobs:
         shell: bash
 
       - name: install dependencies
-        run: npm install --loglevel verbose --ignore-scripts # && npm i --ignore-scripts @mongodb-js/zstd --no-save
+        run: npm install --loglevel verbose --ignore-scripts
         shell: bash
 
       - name: Compile addon
