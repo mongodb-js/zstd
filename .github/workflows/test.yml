@@ -24,8 +24,16 @@ jobs:
           cache: 'npm'
           registry-url: 'https://registry.npmjs.org'
 
-      - name: Build with Node.js ${{ matrix.node }} on ${{ matrix.os }}
-        run: npm install && npm run compile
+      - name: Install zstd
+        run: npm run install-zstd
+        shell: bash
+
+      - name: install dependencies
+        run: npm install --loglevel verbose --ignore-scripts # && npm i --ignore-scripts @mongodb-js/zstd --no-save
+        shell: bash
+
+      - name: Compile addon
+        run: npm run compile
         shell: bash
 
       - name: Test ${{ matrix.os }}
