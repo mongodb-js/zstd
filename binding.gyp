@@ -26,7 +26,7 @@
     },
     'cflags!': [ '-fno-exceptions' ],
     'cflags_cc!': [ '-fno-exceptions' ],
-  'cflags_cc': ['-std=c++17'],
+    'cflags_cc': ['-std=c++17'],
     'msvs_settings': {
       'VCCLCompilerTool': { 'ExceptionHandling': 1 },
     },

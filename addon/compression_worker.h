@@ -3,6 +3,7 @@
 #include <napi.h>
 
 #include <optional>
+#include <variant>
 
 using namespace Napi;
 

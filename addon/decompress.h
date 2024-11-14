@@ -8,8 +8,8 @@ CompressionResult decompress(const std::vector<uint8_t>& compressed) {
 
     using DCTX_Deleter = void (*)(ZSTD_DCtx*);
 
-    std::unique_ptr<ZSTD_DCtx, DCTX_Deleter> decompression_context(ZSTD_createDCtx(),
-                                                                   (DCTX_Deleter)ZSTD_freeDCtx);
+    std::unique_ptr<ZSTD_DCtx, DCTX_Deleter> decompression_context(
+        ZSTD_createDCtx(), [](ZSTD_DCtx* ctx) { ZSTD_freeDCtx(ctx); });
 
     ZSTD_inBuffer input = {compressed.data(), compressed.size(), 0};
 
