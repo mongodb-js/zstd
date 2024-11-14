@@ -29,7 +29,7 @@ jobs:
         shell: bash
 
       - name: install dependencies
-        run: pm install --loglevel verbose --ignore-scripts
+        run: npm install --loglevel verbose --ignore-scripts
         shell: bash
 
       - name: Compile addon
