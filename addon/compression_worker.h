@@ -56,7 +56,7 @@ class CompressionWorker : public Napi::AsyncWorker {
                 m_deferred.Resolve(output);
             },
         };
-        std::visit(visitor, *result_visitor);
+        std::visit(result_visitor, *result);
     }
 
     void OnError(const Napi::Error& err) {
