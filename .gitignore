@@ -10,7 +10,7 @@ lib-cov
 .DS_Store
 
 .vscode
-
+xunit.xml
 pids
 logs
 results

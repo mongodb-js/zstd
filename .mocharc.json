@@ -1,0 +1,7 @@
+{
+  "$schema": "https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/mocharc.json",
+  "extension": ["ts"],
+  "recursive": true,
+  "failZero": true,
+  "color": true
+}
