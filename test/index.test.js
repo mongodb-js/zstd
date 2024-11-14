@@ -5,8 +5,8 @@ const zstdLegacy = require('@mongodb-js/zstd');
 const { expect } = require('chai');
 
 describe('compat tests', function () {
-  describe('old compress, new decompress', testSuite(zstdLegacy.decompress, compress));
-  describe('new compress, decompress', testSuite(decompress, zstdLegacy.compress));
+  describe('new compress, old decompress', testSuite(zstdLegacy.decompress, compress));
+  describe('old compress, new decompress', testSuite(decompress, zstdLegacy.compress));
   describe('new compress, new decompress', testSuite(decompress, compress));
 });
 
@@ -64,7 +64,7 @@ function testSuite(decompress, compress) {
     });
 
     test('huge array', async function () {
-      const input_expected = Array.from({ length: 1_000 }, () => 'a').join('');
+      const input_expected = Array.from({ length: 10_000_000 }, () => 'a').join('');
       const input = Buffer.from(input_expected, 'utf8');
 
       const result = Buffer.from(await decompress(await compress(input)));

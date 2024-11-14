@@ -25,7 +25,7 @@ overload(Ts...) -> overload<Ts...>;
 class CompressionWorker : public Napi::AsyncWorker {
    public:
     CompressionWorker(const Napi::Env& env, std::function<CompressionResult()> worker)
-        : Napi::AsyncWorker{env, "Worker"}, m_deferred{env}, worker(worker), result{} {}
+        : Napi::AsyncWorker{env, "Worker"}, m_deferred{env}, m_worker(worker), m_result{} {}
 
     Napi::Promise GetPromise() {
         return m_deferred.Promise();
@@ -33,11 +33,11 @@ class CompressionWorker : public Napi::AsyncWorker {
 
    protected:
     void Execute() {
-        result = worker();
+        m_result = m_worker();
     }
 
     void OnOK() {
-        if (!result.has_value()) {
+        if (!m_result.has_value()) {
             m_deferred.Reject(Napi::Error::New(Env(),
                                                "zstd runtime error - async worker finished without "
                                                "a compression or decompression result.")
@@ -57,7 +57,7 @@ class CompressionWorker : public Napi::AsyncWorker {
                 m_deferred.Resolve(output);
             },
         };
-        std::visit(result_visitor, *result);
+        std::visit(result_visitor, *m_result);
     }
 
     void OnError(const Napi::Error& err) {
@@ -66,8 +66,8 @@ class CompressionWorker : public Napi::AsyncWorker {
 
    private:
     Napi::Promise::Deferred m_deferred;
-    std::function<CompressionResult()> worker;
-    std::optional<CompressionResult> result;
+    std::function<CompressionResult()> m_worker;
+    std::optional<CompressionResult> m_result;
 };
 
 #endif
