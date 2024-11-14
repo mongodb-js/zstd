@@ -11,11 +11,10 @@ CompressionResult compress(const std::vector<uint8_t> data, size_t compression_l
         ZSTD_compress(output.data(), output.size(), data.data(), data.size(), compression_level);
 
     if (ZSTD_isError(result_code)) {
-        std::string error(ZSTD_getErrorName(result_code));
-        return CompressionResult::Error(error);
+        return std::string(ZSTD_getErrorName(result_code));
     }
 
     output.resize(result_code);
 
-    return CompressionResult::Ok(output);
+    return output;
 }

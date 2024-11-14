@@ -18,8 +18,7 @@ CompressionResult decompress(const std::vector<uint8_t>& compressed) {
         ZSTD_outBuffer output = {chunk.data(), chunk.size(), 0};
         size_t const ret = ZSTD_decompressStream(decompression_context.get(), &output, &input);
         if (ZSTD_isError(ret)) {
-            std::string error(ZSTD_getErrorName(ret));
-            return CompressionResult::Error(error);
+            return std::string(ZSTD_getErrorName(ret));
         }
 
         for (size_t i = 0; i < output.pos; ++i) {
@@ -27,5 +26,5 @@ CompressionResult decompress(const std::vector<uint8_t>& compressed) {
         }
     }
 
-    return CompressionResult::Ok(decompressed);
+    return decompressed;
 }
