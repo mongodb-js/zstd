@@ -2,6 +2,11 @@
 
 using namespace Napi;
 
+/**
+ * @brief Get the Bytes From Uint8 Array object
+ * 
+ * this function copies the bytes out of the Uint8Array.
+ */
 std::vector<uint8_t> getBytesFromUint8Array(const Uint8Array& source) {
     const uint8_t* input_data = source.Data();
     size_t total = source.ElementLength();
