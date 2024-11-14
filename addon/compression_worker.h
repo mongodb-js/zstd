@@ -1,3 +1,5 @@
+#ifndef COMPRESSION_WORKER_H
+#define COMPRESSION_WORKER_H
 #include <napi.h>
 
 #include <optional>
@@ -93,3 +95,5 @@ class CompressionWorker : public Napi::AsyncWorker {
     std::function<CompressionResult()> worker;
     CompressionResult result;
 };
+
+#endif

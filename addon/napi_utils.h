@@ -1,3 +1,6 @@
+#ifndef NAPI_UTILS_H
+#define NAPI_UTILS_H
+
 #include <napi.h>
 
 using namespace Napi;
@@ -18,7 +21,7 @@ std::vector<uint8_t> getBytesFromUint8Array(const Uint8Array& source) {
 }
 
 /**
- * @brief Given an Napi;:Value, this function returns the value as a Uint8Array, if the
+ * @brief Given an Napi::Value, this function returns the value as a Uint8Array, if the
  * Value is a Uint8Array. Otherwise, this function throws.
  *
  * @param v - An Napi::Value
@@ -33,3 +36,5 @@ Uint8Array Uint8ArrayFromValue(Value v, std::string argument_name) {
 
     return v.As<Uint8Array>();
 }
+
+#endif

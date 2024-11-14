@@ -1,11 +1,7 @@
-
-#include <napi.h>
-
 #include <vector>
 
+#include "compression_worker.h"  // CompressionResult
 #include "zstd.h"
-
-using namespace Napi;
 
 CompressionResult compress(const std::vector<uint8_t> data, size_t compression_level) {
     size_t output_buffer_size = ZSTD_compressBound(data.size());

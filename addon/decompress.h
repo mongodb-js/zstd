@@ -1,10 +1,7 @@
-#include <napi.h>
-
 #include <vector>
 
+#include "compression_worker.h"  // CompressionResult
 #include "zstd.h"
-
-using namespace Napi;
 
 CompressionResult decompress(const std::vector<uint8_t>& compressed) {
     std::vector<uint8_t> decompressed;
