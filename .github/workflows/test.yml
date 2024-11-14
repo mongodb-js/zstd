@@ -25,7 +25,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
 
       - name: Build with Node.js ${{ matrix.node }} on ${{ matrix.os }}
-        run: bash etc/install-zstd.sh && npm install
+        run: npm run install-zstd && npm install --loglevel verbose --ignore-scripts && npm run compile
         shell: bash
 
       - name: Test ${{ matrix.os }}
