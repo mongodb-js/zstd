@@ -4,7 +4,7 @@ using namespace Napi;
 
 /**
  * @brief Get the Bytes From Uint8 Array object
- * 
+ *
  * this function copies the bytes out of the Uint8Array.
  */
 std::vector<uint8_t> getBytesFromUint8Array(const Uint8Array& source) {

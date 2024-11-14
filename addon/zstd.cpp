@@ -5,8 +5,8 @@
 #include <string>
 #include <vector>
 
-#include "compression_worker.h"
 #include "compress.h"
+#include "compression_worker.h"
 #include "decompress.h"
 #include "napi_utils.h"
 

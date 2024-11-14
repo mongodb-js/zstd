@@ -43,7 +43,8 @@ struct CompressionResult {
 };
 
 /**
- * @brief An asynchronous Napi::Worker that can be with any function that produces CompressionResults.
+ * @brief An asynchronous Napi::Worker that can be with any function that produces
+ * CompressionResults.
  * */
 class CompressionWorker : public Napi::AsyncWorker {
    public:
