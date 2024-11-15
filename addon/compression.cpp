@@ -1,9 +1,25 @@
-#include <vector>
 
-#include "compression_worker.h"  // CompressionResult
-#include "zstd.h"
 
-CompressionResult decompress(const std::vector<uint8_t>& compressed) {
+#include "compression.h"
+
+CompressionResult Compression::compress(const std::vector<uint8_t>& data,
+                                        size_t compression_level) {
+    size_t output_buffer_size = ZSTD_compressBound(data.size());
+    std::vector<uint8_t> output(output_buffer_size);
+
+    size_t result_code =
+        ZSTD_compress(output.data(), output.size(), data.data(), data.size(), compression_level);
+
+    if (ZSTD_isError(result_code)) {
+        return std::string(ZSTD_getErrorName(result_code));
+    }
+
+    output.resize(result_code);
+
+    return output;
+}
+
+CompressionResult Compression::decompress(const std::vector<uint8_t>& compressed) {
     std::vector<uint8_t> decompressed;
 
     using DCTX_Deleter = void (*)(ZSTD_DCtx*);

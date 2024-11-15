@@ -5,9 +5,8 @@
 #include <string>
 #include <vector>
 
-#include "compress.h"
+#include "compression.h"
 #include "compression_worker.h"
-#include "decompress.h"
 #include "napi_utils.h"
 
 using namespace Napi;
@@ -24,9 +23,10 @@ Napi::Promise Compress(const Napi::CallbackInfo& info) {
 
     size_t compression_level = (size_t)info[1].ToNumber().Int32Value();
 
-    CompressionWorker* worker = new CompressionWorker(
-        info.Env(),
-        [data = std::move(data), compression_level] { return compress(data, compression_level); });
+    CompressionWorker* worker =
+        new CompressionWorker(info.Env(), [data = std::move(data), compression_level] {
+            return Compression::compress(data, compression_level);
+        });
 
     worker->Queue();
 
@@ -42,8 +42,8 @@ Napi::Promise Decompress(const CallbackInfo& info) {
 
     Napi::Uint8Array compressed_data = Uint8ArrayFromValue(info[0], "buffer");
     std::vector<uint8_t> data = getBytesFromUint8Array(compressed_data);
-    CompressionWorker* worker =
-        new CompressionWorker(info.Env(), [data = std::move(data)] { return decompress(data); });
+    CompressionWorker* worker = new CompressionWorker(
+        info.Env(), [data = std::move(data)] { return Compression::decompress(data); });
 
     worker->Queue();
 
