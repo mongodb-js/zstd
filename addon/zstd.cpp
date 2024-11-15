@@ -7,7 +7,6 @@
 
 #include "compression.h"
 #include "compression_worker.h"
-#include "napi_utils.h"
 
 using namespace Napi;
 
