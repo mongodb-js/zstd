@@ -28,12 +28,8 @@ jobs:
         run: npm run install-zstd
         shell: bash
 
-      - name: install dependencies
-        run: npm install --loglevel verbose --ignore-scripts
-        shell: bash
-
-      - name: Compile addon
-        run: npm run compile
+      - name: install dependencies and compmile
+        run: npm install --loglevel verbose
         shell: bash
 
       - name: Test ${{ matrix.os }}
