@@ -2,8 +2,8 @@
 
 #include "compression.h"
 
-CompressionResult Compression::compress(const std::vector<uint8_t>& data,
-                                        size_t compression_level) {
+std::vector<uint8_t> Compression::compress(const std::vector<uint8_t>& data,
+                                           size_t compression_level) {
     size_t output_buffer_size = ZSTD_compressBound(data.size());
     std::vector<uint8_t> output(output_buffer_size);
 
@@ -11,7 +11,7 @@ CompressionResult Compression::compress(const std::vector<uint8_t>& data,
         ZSTD_compress(output.data(), output.size(), data.data(), data.size(), compression_level);
 
     if (ZSTD_isError(result_code)) {
-        return std::string(ZSTD_getErrorName(result_code));
+        throw std::runtime_error(ZSTD_getErrorName(result_code));
     }
 
     output.resize(result_code);
@@ -19,7 +19,7 @@ CompressionResult Compression::compress(const std::vector<uint8_t>& data,
     return output;
 }
 
-CompressionResult Compression::decompress(const std::vector<uint8_t>& compressed) {
+std::vector<uint8_t> Compression::decompress(const std::vector<uint8_t>& compressed) {
     std::vector<uint8_t> decompressed;
 
     using DCTX_Deleter = void (*)(ZSTD_DCtx*);
@@ -56,7 +56,7 @@ CompressionResult Compression::decompress(const std::vector<uint8_t>& compressed
     while (inputRemains(input) || !isOutputBufferFlushed(output)) {
         size_t const ret = ZSTD_decompressStream(decompression_context.get(), &output, &input);
         if (ZSTD_isError(ret)) {
-            return std::string(ZSTD_getErrorName(ret));
+            throw std::runtime_error(ZSTD_getErrorName(ret));
         }
 
         for (size_t i = 0; i < output.pos; ++i) {

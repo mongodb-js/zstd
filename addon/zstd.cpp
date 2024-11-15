@@ -11,9 +11,9 @@
 
 using namespace Napi;
 
-Napi::Promise Compress(const Napi::CallbackInfo& info) {
+void Compress(const Napi::CallbackInfo& info) {
     // Argument handling happens in JS
-    if (info.Length() != 2) {
+    if (info.Length() != 3) {
         std::string error_message = "Expected two arguments.";
         throw TypeError::New(info.Env(), error_message);
     }
@@ -22,32 +22,31 @@ Napi::Promise Compress(const Napi::CallbackInfo& info) {
     std::vector<uint8_t> data = getBytesFromUint8Array(to_compress);
 
     size_t compression_level = (size_t)info[1].ToNumber().Int32Value();
+    const Napi::Function& callback = info[2].As<Function>();
 
     CompressionWorker* worker =
-        new CompressionWorker(info.Env(), [data = std::move(data), compression_level] {
+        new CompressionWorker(callback, [data = std::move(data), compression_level] {
             return Compression::compress(data, compression_level);
         });
 
     worker->Queue();
-
-    return worker->GetPromise();
 }
 
-Napi::Promise Decompress(const CallbackInfo& info) {
+void Decompress(const CallbackInfo& info) {
     // Argument handling happens in JS
-    if (info.Length() != 1) {
+    if (info.Length() != 2) {
         std::string error_message = "Expected one argument.";
         throw TypeError::New(info.Env(), error_message);
     }
 
     Napi::Uint8Array compressed_data = Uint8ArrayFromValue(info[0], "buffer");
     std::vector<uint8_t> data = getBytesFromUint8Array(compressed_data);
+    const Napi::Function& callback = info[1].As<Function>();
+
     CompressionWorker* worker = new CompressionWorker(
-        info.Env(), [data = std::move(data)] { return Compression::decompress(data); });
+        callback, [data = std::move(data)] { return Compression::decompress(data); });
 
     worker->Queue();
-
-    return worker->GetPromise();
 }
 
 Napi::Object Init(Napi::Env env, Napi::Object exports) {

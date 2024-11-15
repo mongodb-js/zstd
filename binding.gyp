@@ -14,8 +14,8 @@
     'sources': [
       'addon/zstd.cpp',
       'addon/compression_worker.h',
-      'addon/compress.h',
-      'addon/decompress.h',
+      'addon/compression.h',
+  'addon/compression.cpp',
       'addon/napi_utils.h',
     ],
     'xcode_settings': {
