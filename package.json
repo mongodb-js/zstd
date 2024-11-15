@@ -29,6 +29,7 @@
     "node": ">= 16.20.1"
   },
   "scripts": {
+    "prepare": "npm run compile",
     "compile": "node-gyp rebuild",
 
     "test": "mocha test/index.test.js",

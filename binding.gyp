@@ -15,8 +15,7 @@
       'addon/zstd.cpp',
       'addon/compression_worker.h',
       'addon/compression.h',
-  'addon/compression.cpp',
-      'addon/napi_utils.h',
+      'addon/compression.cpp'
     ],
     'xcode_settings': {
       'GCC_ENABLE_CPP_EXCEPTIONS': 'YES',
