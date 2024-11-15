@@ -1,5 +1,5 @@
-#ifndef COMPRESSION_WORKER_H
-#define COMPRESSION_WORKER_H
+#ifndef MONGODB_ZSTD_COMPRESSION_WORKER_H
+#define MONGODB_ZSTD_COMPRESSION_WORKER_H
 #include <napi.h>
 
 #include <optional>
@@ -27,6 +27,7 @@ class CompressionWorker final : public Napi::AsyncWorker {
                                               "zstd runtime error - async worker finished without "
                                               "a compression or decompression result.")
                                  .Value()});
+            return;
         }
 
         std::vector<uint8_t> data = *m_result;
