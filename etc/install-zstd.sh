@@ -1,4 +1,4 @@
-
+#!/bin/sh
 set -o xtrace
 
 clean_deps() {

@@ -7,9 +7,9 @@
 #include "compression_worker.h"
 #include "zstd.h"
 
-namespace Compression {
+namespace mongodb_zstd {
 std::vector<uint8_t> compress(const std::vector<uint8_t>& data, size_t compression_level);
 std::vector<uint8_t> decompress(const std::vector<uint8_t>& data);
-}  // namespace Compression
+}  // namespace mongodb_zstd
 
 #endif

@@ -7,6 +7,7 @@
 
 using namespace Napi;
 
+namespace mongodb_zstd {
 /**
  * @brief An asynchronous Napi::Worker that can be with any function that produces
  * CompressionResults.
@@ -17,11 +18,11 @@ class CompressionWorker final : public Napi::AsyncWorker {
         : Napi::AsyncWorker{callback, "compression worker"}, m_worker(worker), m_result{} {}
 
    protected:
-    void Execute() final {
+    void Execute() {
         m_result = m_worker();
     }
 
-    void OnOK() final {
+    void OnOK() {
         if (!m_result.has_value()) {
             Callback().Call({Napi::Error::New(Env(),
                                               "zstd runtime error - async worker finished without "
@@ -41,4 +42,5 @@ class CompressionWorker final : public Napi::AsyncWorker {
     std::optional<std::vector<uint8_t>> m_result;
 };
 
+}  // namespace mongodb_zstd
 #endif

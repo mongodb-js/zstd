@@ -2,7 +2,7 @@
 
 #include "compression.h"
 
-std::vector<uint8_t> Compression::compress(const std::vector<uint8_t>& data,
+std::vector<uint8_t> mongodb_zstd::compress(const std::vector<uint8_t>& data,
                                            size_t compression_level) {
     size_t output_buffer_size = ZSTD_compressBound(data.size());
     std::vector<uint8_t> output(output_buffer_size);
@@ -19,7 +19,7 @@ std::vector<uint8_t> Compression::compress(const std::vector<uint8_t>& data,
     return output;
 }
 
-std::vector<uint8_t> Compression::decompress(const std::vector<uint8_t>& compressed) {
+std::vector<uint8_t> mongodb_zstd::decompress(const std::vector<uint8_t>& compressed) {
     std::vector<uint8_t> decompressed;
 
     using DCTX_Deleter = void (*)(ZSTD_DCtx*);
@@ -50,8 +50,8 @@ std::vector<uint8_t> Compression::decompress(const std::vector<uint8_t>& compres
     //                                 the return value is a suggested next input size (just a hint
     //                                 for better latency) that will never request more than the
     //                                 remaining frame size.
-    auto inputRemains = [](ZSTD_inBuffer& input) { return input.pos < input.size; };
-    auto isOutputBufferFlushed = [](ZSTD_outBuffer& output) { return output.pos < output.size; };
+    auto inputRemains = [](const ZSTD_inBuffer& input) { return input.pos < input.size; };
+    auto isOutputBufferFlushed = [](const ZSTD_outBuffer& output) { return output.pos < output.size; };
 
     while (inputRemains(input) || !isOutputBufferFlushed(output)) {
         size_t const ret = ZSTD_decompressStream(decompression_context.get(), &output, &input);
@@ -59,9 +59,11 @@ std::vector<uint8_t> Compression::decompress(const std::vector<uint8_t>& compres
             throw std::runtime_error(ZSTD_getErrorName(ret));
         }
 
-        for (size_t i = 0; i < output.pos; ++i) {
-            decompressed.push_back(output_buffer[i]);
-        }
+        size_t decompressed_size = decompressed.size();
+        decompressed.resize(decompressed_size + output.pos);
+        std::copy(output_buffer.data(),
+                  output_buffer.data() + output.pos,
+                  decompressed.data() + decompressed_size);
 
         // move the position back go 0, to indicate that we are ready for more data
         output.pos = 0;
