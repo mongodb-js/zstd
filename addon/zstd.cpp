@@ -57,5 +57,4 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
 
 NODE_API_MODULE(zstd, Init)
 
-} // namespace mongodb_zstd
-
+}  // namespace mongodb_zstd

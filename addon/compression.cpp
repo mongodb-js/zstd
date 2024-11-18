@@ -3,7 +3,7 @@
 #include "compression.h"
 
 std::vector<uint8_t> mongodb_zstd::compress(const std::vector<uint8_t>& data,
-                                           size_t compression_level) {
+                                            size_t compression_level) {
     size_t output_buffer_size = ZSTD_compressBound(data.size());
     std::vector<uint8_t> output(output_buffer_size);
 
@@ -51,7 +51,9 @@ std::vector<uint8_t> mongodb_zstd::decompress(const std::vector<uint8_t>& compre
     //                                 for better latency) that will never request more than the
     //                                 remaining frame size.
     auto inputRemains = [](const ZSTD_inBuffer& input) { return input.pos < input.size; };
-    auto isOutputBufferFlushed = [](const ZSTD_outBuffer& output) { return output.pos < output.size; };
+    auto isOutputBufferFlushed = [](const ZSTD_outBuffer& output) {
+        return output.pos < output.size;
+    };
 
     while (inputRemains(input) || !isOutputBufferFlushed(output)) {
         size_t const ret = ZSTD_decompressStream(decompression_context.get(), &output, &input);
