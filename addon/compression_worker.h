@@ -12,26 +12,26 @@ namespace mongodb_zstd {
  * @brief An asynchronous Napi::Worker that can be with any function that produces
  * CompressionResults.
  * */
-class CompressionWorker final : public Napi::AsyncWorker {
+class CompressionWorker final : public AsyncWorker {
    public:
-    CompressionWorker(const Napi::Function& callback, std::function<std::vector<uint8_t>()> worker)
-        : Napi::AsyncWorker{callback, "compression worker"}, m_worker(worker), m_result{} {}
+    CompressionWorker(const Function& callback, std::function<std::vector<uint8_t>()> worker)
+        : AsyncWorker{callback, "compression worker"}, m_worker(worker), m_result{} {}
 
    protected:
-    void Execute() {
+    void Execute() final {
         m_result = m_worker();
     }
 
-    void OnOK() {
+    void OnOK() final {
         if (!m_result.has_value()) {
-            Callback().Call({Napi::Error::New(Env(),
-                                              "zstd runtime error - async worker finished without "
-                                              "a compression or decompression result.")
+            Callback().Call({Error::New(Env(),
+                                        "zstd runtime  - async worker finished without "
+                                        "a compression or decompression result.")
                                  .Value()});
             return;
         }
 
-        std::vector<uint8_t> data = *m_result;
+        const std::vector<uint8_t>& data = m_result.value();
         Buffer result = Buffer<uint8_t>::Copy(Env(), data.data(), data.size());
 
         Callback().Call({Env().Undefined(), result});

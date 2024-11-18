@@ -29,7 +29,7 @@
     'msvs_settings': {
       'VCCLCompilerTool': { 'ExceptionHandling': 1 },
     },
-	 'link_settings': {
+    'link_settings': {
       'libraries': [
         '<(module_root_dir)/deps/zstd/build/cmake/lib/libzstd.a',
       ]

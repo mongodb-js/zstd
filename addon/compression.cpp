@@ -1,5 +1,3 @@
-
-
 #include "compression.h"
 
 std::vector<uint8_t> mongodb_zstd::compress(const std::vector<uint8_t>& data,

@@ -10,7 +10,7 @@
 using namespace Napi;
 
 namespace mongodb_zstd {
-void Compress(const Napi::CallbackInfo& info) {
+void Compress(const CallbackInfo& info) {
     // Argument handling happens in JS
     if (info.Length() != 3) {
         const char* error_message = "Expected three arguments.";
@@ -21,7 +21,7 @@ void Compress(const Napi::CallbackInfo& info) {
     std::vector<uint8_t> data(to_compress.Data(), to_compress.Data() + to_compress.ElementLength());
 
     size_t compression_level = static_cast<size_t>(info[1].ToNumber().Int32Value());
-    const Napi::Function& callback = info[2].As<Function>();
+    Function callback = info[2].As<Function>();
 
     CompressionWorker* worker =
         new CompressionWorker(callback, [data = std::move(data), compression_level] {
@@ -38,10 +38,10 @@ void Decompress(const CallbackInfo& info) {
         throw TypeError::New(info.Env(), error_message);
     }
 
-    Napi::Uint8Array compressed_data = info[0].As<Uint8Array>();
+    Uint8Array compressed_data = info[0].As<Uint8Array>();
     std::vector<uint8_t> data(compressed_data.Data(),
                               compressed_data.Data() + compressed_data.ElementLength());
-    const Napi::Function& callback = info[1].As<Function>();
+    Function callback = info[1].As<Function>();
 
     CompressionWorker* worker = new CompressionWorker(
         callback, [data = std::move(data)] { return mongodb_zstd::decompress(data); });
@@ -49,9 +49,9 @@ void Decompress(const CallbackInfo& info) {
     worker->Queue();
 }
 
-Napi::Object Init(Napi::Env env, Napi::Object exports) {
-    exports.Set(Napi::String::New(env, "compress"), Napi::Function::New(env, Compress));
-    exports.Set(Napi::String::New(env, "decompress"), Napi::Function::New(env, Decompress));
+Object Init(Env env, Object exports) {
+    exports.Set(String::New(env, "compress"), Function::New(env, Compress));
+    exports.Set(String::New(env, "decompress"), Function::New(env, Decompress));
     return exports;
 }
 
