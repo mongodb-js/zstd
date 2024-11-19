@@ -65,6 +65,13 @@
   },
   "overrides": [
     {
+      "files": ["lib/*.js"],
+      "parserOptions": {
+        "ecmaVersion": 2019,
+        "sourceType": "commonjs"
+      }
+    },
+    {
       "files": ["test/**/*ts"],
       "rules": {
         // chat `expect(..)` style chaining is considered

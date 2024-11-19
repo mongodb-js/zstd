@@ -1,0 +1,38 @@
+name: Lint
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    name: ${{ matrix.lint-target }}
+    strategy:
+      matrix:
+        lint-target: ["c++", "typescript"]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Use Node.js LTS
+      uses: actions/setup-node@v4
+      with:
+        node-version: 'lts/*'
+        cache: 'npm'
+
+    - name: Install dependencies
+      shell: bash
+      run: npm i --ignore-scripts
+
+    - if: matrix.lint-target == 'c++'
+      shell: bash
+      run: |
+        npm run check:clang-format
+    - if: matrix.lint-target == 'typescript'
+      shell: bash
+      run: |
+        npm run check:eslint
