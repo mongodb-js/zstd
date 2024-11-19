@@ -14,7 +14,7 @@ download_zstd() {
 }
 
 build_zstd() {
-	export MACOSX_DEPLOYMENT_TARGET=10.12
+	export MACOSX_DEPLOYMENT_TARGET=11
 	cd deps/zstd/build/cmake
 
 	cmake .

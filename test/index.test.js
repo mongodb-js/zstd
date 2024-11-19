@@ -1,4 +1,4 @@
-const { describe, test } = require('mocha');
+const { test } = require('mocha');
 const { compress, decompress } = require('../lib/index');
 
 const zstdLegacy = require('@mongodb-js/zstd');
@@ -14,7 +14,7 @@ describe('decompress', function () {
   test('decompress() throws a TypeError', async function () {
     expect(await decompress().catch(e => e))
       .to.be.instanceOf(TypeError)
-      .to.match(/must be a buffer/i);
+      .to.match(/must be a uint8array/i);
   });
 
   test('decompress() returns a Nodejs buffer', async function () {
@@ -27,7 +27,7 @@ describe('compress', function () {
   test('compress() throws a TypeError', async function () {
     expect(await compress().catch(e => e))
       .to.be.instanceOf(TypeError)
-      .to.match(/must be a buffer/i);
+      .to.match(/must be a uint8array/i);
   });
 
   test('compress() returns a Nodejs buffer', async function () {
