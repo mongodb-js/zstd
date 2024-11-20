@@ -1,7 +1,7 @@
 #ifndef MONGODB_ZSTD_COMPRESSION
 #define MONGODB_ZSTD_COMPRESSION
 
-#include <exception>
+#include <stdexcept>
 #include <vector>
 
 #include "compression_worker.h"

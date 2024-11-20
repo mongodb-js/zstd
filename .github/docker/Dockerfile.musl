@@ -1,0 +1,14 @@
+
+ARG PLATFORM=arm64
+ARG NODE_VERSION=16.20.1
+
+FROM ${PLATFORM}/node:${NODE_VERSION}-alpine AS node
+
+WORKDIR /zstd
+COPY . .
+
+RUN apk --no-cache add make g++ libc-dev curl bash python3 py3-pip vim cmake
+RUN npm run install-zstd && npm i
+
+ARG RUN_TEST
+RUN if [ -n "$RUN_TEST" ]; then npm test ; else echo "skipping tests" ; fi

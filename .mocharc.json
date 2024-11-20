@@ -3,5 +3,6 @@
   "extension": ["ts"],
   "recursive": true,
   "failZero": true,
-  "color": true
+  "color": true,
+  "timeout": 0
 }
