@@ -76,50 +76,11 @@ jobs:
   #           -f ./.github/docker/Dockerfile.glibc \
   #           .
 
-  # container_tests_musl_amd64:
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     matrix:
-  #       linux_arch: [amd64]
-  #       node: [16.20.1, 18.x, 20.x, 22.x]
-  #     fail-fast: false
-  #   steps:
-  #     - uses: actions/checkout@v4
-
-  #     - uses: actions/setup-node@v4
-  #       with:
-  #         node-version: ${{ matrix.node }}
-
-  #     - name: Get Full Node.js Version
-  #       id: get_nodejs_version
-  #       shell: bash
-  #       run: |
-  #         echo "version=$(node --print 'process.version.slice(1)')" >> "$GITHUB_OUTPUT"
-
-  #     - name: Set up QEMU
-  #       uses: docker/setup-qemu-action@v3
-
-  #     - name: Set up Docker Buildx
-  #       uses: docker/setup-buildx-action@v3
-
-  #     - name: Run Buildx
-  #       run: |
-  #         docker buildx create --name builder --bootstrap --use
-  #         docker --debug buildx build --progress=plain --no-cache \
-  #           --platform linux/${{ matrix.linux_arch }} \
-  #           --build-arg="PLATFORM=${{ matrix.linux_arch }}" \
-  #           --build-arg="NODE_VERSION=${{ steps.get_nodejs_version.outputs.version }}" \
-  #           --build-arg="RUN_TEST=true" \
-  #           --output type=local,dest=./prebuilds,platform-split=false \
-  #           -f ./.github/docker/Dockerfile.musl \
-  #           .
-
-  # TODO: fix musl_arm64 tests on Node18+
-  container_tests_musl_arm64:
+  container_tests_musl_amd64:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        linux_arch: [arm64v8]
+        linux_arch: [amd64, arm64v8]
         node: [16.20.1, 18.x, 20.x, 22.x]
       fail-fast: false
     steps:
@@ -143,15 +104,12 @@ jobs:
 
       - name: Run Buildx
         run: |
-          echo "Docker version: $(docker --version)"          
           docker buildx create --name builder --bootstrap --use
-          echo "${{ steps.get_nodejs_version.outputs.version }}"
-          IMAGE="arm64v8/node:${{ steps.get_nodejs_version.outputs.version }}-alpine"
-          echo "Image: $IMAGE"
-          docker --debug image pull --platform arm64 $IMAGE
-          echo '---------'
+          docker buildx create --name builder --bootstrap --use
+          PLATFORM=$(node -p 'process.arch')
+          echo $PLATFORM
           docker --debug buildx build --progress=plain --no-cache \
-            --platform linux/arm64 \
+            --platform linux/$PLATFORM \
             --build-arg="PLATFORM=${{ matrix.linux_arch }}" \
             --build-arg="NODE_VERSION=${{ steps.get_nodejs_version.outputs.version }}" \
             --build-arg="RUN_TEST=true" \
