@@ -1,13 +1,22 @@
 const { test } = require('mocha');
 const { compress, decompress } = require('../lib/index');
 
-const zstdLegacy = require('@mongodb-js/zstd');
 const { expect } = require('chai');
 
 describe('compat tests', function () {
-  describe('new compress, old decompress', testSuite(zstdLegacy.decompress, compress));
-  describe('old compress, new decompress', testSuite(decompress, zstdLegacy.compress));
-  describe('new compress, new decompress', testSuite(decompress, compress));
+  let zstdLegacy;
+  try {
+    zstdLegacy = require('@mongodb-js/zstd');
+  } catch {
+    // swallow
+  }
+
+  const isLinuxs390x = process.platform === 'linux' && process.arch === 's390x';
+  if (!isLinuxs390x) {
+    describe('new compress, old decompress', testSuite(zstdLegacy.decompress, compress));
+    describe('old compress, new decompress', testSuite(decompress, zstdLegacy.compress));
+    describe('new compress, new decompress', testSuite(decompress, compress));
+  }
 });
 
 describe('decompress', function () {
@@ -18,7 +27,7 @@ describe('decompress', function () {
   });
 
   test('decompress() returns a Nodejs buffer', async function () {
-    const compressed = await zstdLegacy.compress(Buffer.from([1, 2, 3]));
+    const compressed = await compress(Buffer.from([1, 2, 3]));
     expect(await decompress(compressed)).to.be.instanceOf(Buffer);
   });
 });
@@ -35,8 +44,8 @@ describe('compress', function () {
   });
 
   test('decompress() with empty buffer', async function () {
-    expect(await decompress(Buffer.from([]))).to.deep.equal(Buffer.from([]))
-  })
+    expect(await decompress(Buffer.from([]))).to.deep.equal(Buffer.from([]));
+  });
 });
 
 /**
