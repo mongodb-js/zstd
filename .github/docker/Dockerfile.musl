@@ -2,7 +2,7 @@
 ARG PLATFORM=arm64
 ARG NODE_VERSION=16.20.1
 
-FROM docker.io/arm64v8/node:18.0.0-alpine@sha256:406932de43d1cbc1b6f8d767260feb9cac40077e0a8ffe002fd6713259059d32 AS node
+FROM ${PLATFORM}/node:${NODE_VERSION}-alpine AS node
 
 WORKDIR /zstd
 COPY . .

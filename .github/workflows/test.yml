@@ -120,7 +120,7 @@ jobs:
     strategy:
       matrix:
         linux_arch: [arm64v8]
-        node: [18.x]
+        node: [18.0.0]
       fail-fast: false
     steps:
       - uses: actions/checkout@v4
@@ -145,6 +145,8 @@ jobs:
         run: |
           echo "Docker version: $(docker --version)"          
           docker buildx create --name builder --bootstrap --use
+          docker image pull arm64v8/node:18.0.0-alpine
+          echo '---------'
           docker --debug buildx build --progress=plain --no-cache \
             --platform linux/${{ matrix.linux_arch }} \
             --build-arg="PLATFORM=${{ matrix.linux_arch }}" \
