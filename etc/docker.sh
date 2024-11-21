@@ -18,10 +18,10 @@ build_and_test_musl() {
 
     docker --debug buildx build --load --progress=plain --no-cache \
         --platform linux/$LINUX_ARCH --output=type=docker \
-        --build-arg="PLATFORM=$LINUX_ARCH" \
+        --build-arg="PLATFORM=arm64v8" \
         --build-arg="NODE_VERSION=$NODE_VERSION" \
         --build-arg="RUN_TEST=true" \
-        -f ./.github/docker/Dockerfile.musl -t musl-zstd-base \
+        -f ./.github/docker/Dockerfile.musl \
         .
 }
 
