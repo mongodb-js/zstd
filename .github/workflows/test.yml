@@ -120,7 +120,7 @@ jobs:
     strategy:
       matrix:
         linux_arch: [arm64v8]
-        node: [18.x]
+        node: [16.20.1, 18.x, 20.x, 22.x]
       fail-fast: false
     steps:
       - uses: actions/checkout@v4
