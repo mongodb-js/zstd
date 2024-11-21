@@ -145,8 +145,9 @@ jobs:
         run: |
           echo "Docker version: $(docker --version)"          
           docker buildx create --name builder --bootstrap --use
+          echo "${{ steps.get_nodejs_version.outputs.version }}"
           IMAGE="arm64v8/node:${{ steps.get_nodejs_version.outputs.version }}-alpine"
-          echo "Image: $IMGAE"
+          echo "Image: $IMAGE"
           docker image pull $IMAGE
           echo '---------'
           docker --debug buildx build --progress=plain --no-cache \
