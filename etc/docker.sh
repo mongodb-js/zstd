@@ -16,6 +16,7 @@ PROJECT_DIR=$SCRIPT_DIR/..
 build_and_test_musl() {
     docker buildx create --name builder --bootstrap --use
 
+    docker image pull arm64v8/node:18.0.0-alpine
     docker --debug buildx build --load --progress=plain --no-cache \
         --platform linux/$LINUX_ARCH --output=type=docker \
         --build-arg="PLATFORM=arm64v8" \
