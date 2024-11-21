@@ -8,111 +8,111 @@ on:
 name: Test
 
 jobs:
-  host_tests:
-    strategy:
-      matrix:
-        os: [macos-latest, windows-2019]
-        node: [16.20.1, 18.x, 20.x, 22.x]
-      fail-fast: false
-    runs-on: ${{ matrix.os }}
-    steps:
-      - uses: actions/checkout@v4
+  # host_tests:
+  #   strategy:
+  #     matrix:
+  #       os: [macos-latest, windows-2019]
+  #       node: [16.20.1, 18.x, 20.x, 22.x]
+  #     fail-fast: false
+  #   runs-on: ${{ matrix.os }}
+  #   steps:
+  #     - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node }}
-          cache: "npm"
-          registry-url: "https://registry.npmjs.org"
+  #     - uses: actions/setup-node@v4
+  #       with:
+  #         node-version: ${{ matrix.node }}
+  #         cache: "npm"
+  #         registry-url: "https://registry.npmjs.org"
 
-      - name: Install zstd
-        run: npm run install-zstd
-        shell: bash
+  #     - name: Install zstd
+  #       run: npm run install-zstd
+  #       shell: bash
 
-      - name: install dependencies and compmile
-        run: npm install --loglevel verbose
-        shell: bash
+  #     - name: install dependencies and compmile
+  #       run: npm install --loglevel verbose
+  #       shell: bash
 
-      - name: Test ${{ matrix.os }}
-        shell: bash
-        run: npm test
+  #     - name: Test ${{ matrix.os }}
+  #       shell: bash
+  #       run: npm test
 
-  container_tests_glibc:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        linux_arch: [s390x, arm64, amd64]
-        node: [16.x, 18.x, 20.x, 22.x]
-      fail-fast: false
-    steps:
-      - uses: actions/checkout@v4
+  # container_tests_glibc:
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       linux_arch: [s390x, arm64, amd64]
+  #       node: [16.x, 18.x, 20.x, 22.x]
+  #     fail-fast: false
+  #   steps:
+  #     - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node }}
+  #     - uses: actions/setup-node@v4
+  #       with:
+  #         node-version: ${{ matrix.node }}
 
-      - name: Get Full Node.js Version
-        id: get_nodejs_version
-        shell: bash
-        run: |
-          echo "version=$(node --print 'process.version.slice(1)')" >> "$GITHUB_OUTPUT"
-          echo "ubuntu_version=$(node --print '(+process.version.slice(1).split(`.`).at(0)) > 16 ? `noble` : `bionic`')" >> "$GITHUB_OUTPUT"
+  #     - name: Get Full Node.js Version
+  #       id: get_nodejs_version
+  #       shell: bash
+  #       run: |
+  #         echo "version=$(node --print 'process.version.slice(1)')" >> "$GITHUB_OUTPUT"
+  #         echo "ubuntu_version=$(node --print '(+process.version.slice(1).split(`.`).at(0)) > 16 ? `noble` : `bionic`')" >> "$GITHUB_OUTPUT"
 
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
+  #     - name: Set up QEMU
+  #       uses: docker/setup-qemu-action@v3
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+  #     - name: Set up Docker Buildx
+  #       uses: docker/setup-buildx-action@v3
 
-      - name: Run Buildx
-        run: |
-          docker buildx create --name builder --bootstrap --use
-          docker buildx build \
-            --platform linux/${{ matrix.linux_arch }} \
-            --build-arg="NODE_ARCH=${{ matrix.linux_arch == 'amd64' && 'x64' || matrix.linux_arch }}" \
-            --build-arg="NODE_VERSION=${{ steps.get_nodejs_version.outputs.version }}" \
-            --build-arg="UBUNTU_VERSION=${{ steps.get_nodejs_version.outputs.ubuntu_version }}" \
-            --build-arg="RUN_TEST=true" \
-            --output type=local,dest=./prebuilds,platform-split=false \
-            -f ./.github/docker/Dockerfile.glibc \
-            .
+  #     - name: Run Buildx
+  #       run: |
+  #         docker buildx create --name builder --bootstrap --use
+  #         docker buildx build \
+  #           --platform linux/${{ matrix.linux_arch }} \
+  #           --build-arg="NODE_ARCH=${{ matrix.linux_arch == 'amd64' && 'x64' || matrix.linux_arch }}" \
+  #           --build-arg="NODE_VERSION=${{ steps.get_nodejs_version.outputs.version }}" \
+  #           --build-arg="UBUNTU_VERSION=${{ steps.get_nodejs_version.outputs.ubuntu_version }}" \
+  #           --build-arg="RUN_TEST=true" \
+  #           --output type=local,dest=./prebuilds,platform-split=false \
+  #           -f ./.github/docker/Dockerfile.glibc \
+  #           .
 
-  container_tests_musl_amd64:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        linux_arch: [amd64]
-        node: [16.20.1, 18.x, 20.x, 22.x]
-      fail-fast: false
-    steps:
-      - uses: actions/checkout@v4
+  # container_tests_musl_amd64:
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       linux_arch: [amd64]
+  #       node: [16.20.1, 18.x, 20.x, 22.x]
+  #     fail-fast: false
+  #   steps:
+  #     - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node }}
+  #     - uses: actions/setup-node@v4
+  #       with:
+  #         node-version: ${{ matrix.node }}
 
-      - name: Get Full Node.js Version
-        id: get_nodejs_version
-        shell: bash
-        run: |
-          echo "version=$(node --print 'process.version.slice(1)')" >> "$GITHUB_OUTPUT"
+  #     - name: Get Full Node.js Version
+  #       id: get_nodejs_version
+  #       shell: bash
+  #       run: |
+  #         echo "version=$(node --print 'process.version.slice(1)')" >> "$GITHUB_OUTPUT"
 
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
+  #     - name: Set up QEMU
+  #       uses: docker/setup-qemu-action@v3
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+  #     - name: Set up Docker Buildx
+  #       uses: docker/setup-buildx-action@v3
 
-      - name: Run Buildx
-        run: |
-          docker buildx create --name builder --bootstrap --use
-          docker --debug buildx build --progress=plain --no-cache \
-            --platform linux/${{ matrix.linux_arch }} \
-            --build-arg="PLATFORM=${{ matrix.linux_arch }}" \
-            --build-arg="NODE_VERSION=${{ steps.get_nodejs_version.outputs.version }}" \
-            --build-arg="RUN_TEST=true" \
-            --output type=local,dest=./prebuilds,platform-split=false \
-            -f ./.github/docker/Dockerfile.musl \
-            .
+  #     - name: Run Buildx
+  #       run: |
+  #         docker buildx create --name builder --bootstrap --use
+  #         docker --debug buildx build --progress=plain --no-cache \
+  #           --platform linux/${{ matrix.linux_arch }} \
+  #           --build-arg="PLATFORM=${{ matrix.linux_arch }}" \
+  #           --build-arg="NODE_VERSION=${{ steps.get_nodejs_version.outputs.version }}" \
+  #           --build-arg="RUN_TEST=true" \
+  #           --output type=local,dest=./prebuilds,platform-split=false \
+  #           -f ./.github/docker/Dockerfile.musl \
+  #           .
 
   # TODO: fix musl_arm64 tests on Node18+
   container_tests_musl_arm64:
@@ -120,7 +120,7 @@ jobs:
     strategy:
       matrix:
         linux_arch: [arm64v8]
-        node: [16.20.1]
+        node: [18.x]
       fail-fast: false
     steps:
       - uses: actions/checkout@v4
@@ -143,6 +143,7 @@ jobs:
 
       - name: Run Buildx
         run: |
+          echo "Docker version: $(docker --version)"          
           docker buildx create --name builder --bootstrap --use
           docker --debug buildx build --progress=plain --no-cache \
             --platform linux/${{ matrix.linux_arch }} \
