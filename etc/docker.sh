@@ -8,7 +8,7 @@
 LINUX_ARCH=arm64
 
 # 16.20.1+, default 16.20.1
-NODE_VERSION=16.20.1
+NODE_VERSION=18.0.0
 
 SCRIPT_DIR=$(dirname ${BASH_SOURCE:-$0})
 PROJECT_DIR=$SCRIPT_DIR/..
@@ -43,3 +43,4 @@ build_and_test_glibc() {
 }
 
 
+build_and_test_musl
