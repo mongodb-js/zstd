@@ -151,7 +151,7 @@ jobs:
           docker --debug image pull --platform arm64 $IMAGE
           echo '---------'
           docker --debug buildx build --progress=plain --no-cache \
-            --platform linux/${{ matrix.linux_arch }} \
+            --platform linux/arm64 \
             --build-arg="PLATFORM=${{ matrix.linux_arch }}" \
             --build-arg="NODE_VERSION=${{ steps.get_nodejs_version.outputs.version }}" \
             --build-arg="RUN_TEST=true" \
