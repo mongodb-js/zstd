@@ -80,7 +80,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        linux_arch: [amd64, arm64v8]
+        linux_arch: [amd64, arm64]
         node: [16.20.1, 18.x, 20.x, 22.x]
       fail-fast: false
     steps:
@@ -105,12 +105,9 @@ jobs:
       - name: Run Buildx
         run: |
           docker buildx create --name builder --bootstrap --use
-          docker buildx create --name builder --bootstrap --use
-          PLATFORM=$(node -p 'process.arch')
-          echo $PLATFORM
           docker --debug buildx build --progress=plain --no-cache \
-            --platform linux/$PLATFORM \
-            --build-arg="PLATFORM=${{ matrix.linux_arch }}" \
+            --platform linux/${{ matrix.linux_arch }} \
+            --build-arg="PLATFORM=${{ matrix.linux_arch == 'arm64' && 'arm64v8' || matrix.linux_arch }}" \
             --build-arg="NODE_VERSION=${{ steps.get_nodejs_version.outputs.version }}" \
             --build-arg="RUN_TEST=true" \
             --output type=local,dest=./prebuilds,platform-split=false \
