@@ -2,7 +2,7 @@
 ARG PLATFORM=arm64
 ARG NODE_VERSION=16.20.1
 
-FROM ${PLATFORM}/node:${NODE_VERSION}-alpine AS node
+FROM ${PLATFORM}/node:${NODE_VERSION}-alpine AS build
 
 WORKDIR /zstd
 COPY . .
