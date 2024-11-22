@@ -49,5 +49,6 @@
     "napi_versions": [
       4
     ]
-  }
+  },
+  "zstd_version": "1.5.6"
 }

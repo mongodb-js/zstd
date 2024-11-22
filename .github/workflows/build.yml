@@ -6,22 +6,28 @@ on:
 
 name: Build
 
-permissions:
-  contents: write
-  pull-requests: write
-  id-token: write
-
 jobs:
-  host_builds:
+  host_tests:
     strategy:
       matrix:
         os: [macos-latest, windows-2019]
+      fail-fast: false
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build ${{ matrix.os }} Prebuild
-        run: npm i --ignore-scripts && npm run install-zstd && npm run compile
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 16.20.1
+          cache: "npm"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install zstd
+        run: npm run install-zstd
+        shell: bash
+
+      - name: install dependencies and compile
+        run: npm install --loglevel verbose
         shell: bash
 
       - id: upload
@@ -34,15 +40,18 @@ jobs:
           retention-days: 1
           compression-level: 0
 
-  container_builds:
-    outputs:
-      artifact_id: ${{ steps.upload.outputs.artifact-id }}
+  container_tests_glibc:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         linux_arch: [s390x, arm64, amd64]
+      fail-fast: false
     steps:
       - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -56,6 +65,8 @@ jobs:
           docker buildx build \
             --platform linux/${{ matrix.linux_arch }} \
             --build-arg="NODE_ARCH=${{ matrix.linux_arch == 'amd64' && 'x64' || matrix.linux_arch }}" \
+            --build-arg="NODE_VERSION=16.20.1" \
+            --build-arg="UBUNTU_VERSION=${{ steps.get_nodejs_version.outputs.ubuntu_version }}" \
             --output type=local,dest=./prebuilds,platform-split=false \
             -f ./.github/docker/Dockerfile.glibc \
             .
@@ -64,7 +75,47 @@ jobs:
         name: Upload prebuild
         uses: actions/upload-artifact@v4
         with:
-          name: build-linux-${{ matrix.linux_arch }}
+          name: build-linux-glibc-${{ matrix.linux_arch }}
+          path: prebuilds/
+          if-no-files-found: "error"
+          retention-days: 1
+          compression-level: 0
+
+  container_tests_musl:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        linux_arch: [amd64, arm64]
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Run Buildx
+        run: |
+          docker buildx create --name builder --bootstrap --use
+          docker --debug buildx build --progress=plain --no-cache \
+            --platform linux/${{ matrix.linux_arch }} \
+            --build-arg="PLATFORM=${{ matrix.linux_arch == 'arm64' && 'arm64v8' || matrix.linux_arch }}" \
+            --build-arg="NODE_VERSION=16.20.1" \
+            --output type=local,dest=./prebuilds,platform-split=false \
+            -f ./.github/docker/Dockerfile.musl \
+            .
+
+      - id: upload
+        name: Upload prebuild
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-linux-musl-${{ matrix.linux_arch }}
           path: prebuilds/
           if-no-files-found: "error"
           retention-days: 1
