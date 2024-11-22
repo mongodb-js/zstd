@@ -13,3 +13,8 @@ RUN npm run prebuild
 
 ARG RUN_TEST
 RUN if [ -n "$RUN_TEST" ]; then npm test ; else echo "skipping tests" ; fi
+
+
+FROM scratch
+
+COPY --from=build /mongodb-client-encryption/prebuilds/ /
