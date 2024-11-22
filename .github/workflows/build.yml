@@ -27,7 +27,7 @@ jobs:
         shell: bash
 
       - name: install dependencies and compile
-        run: npm install --loglevel verbose
+        run: npm install --loglevel verbose && npm run prebuild
         shell: bash
 
       - id: upload
