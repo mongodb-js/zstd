@@ -8,7 +8,7 @@ clean_deps() {
 download_zstd() {
 	rm -rf deps
 	mkdir -p deps/zstd
-	ZSTD_VERSION=$(cat package.json | jq -r '.zstd_version')
+	ZSTD_VERSION=$(node -p "require('./package.json').zstd_version")
 
 	curl -L "https://github.com/facebook/zstd/releases/download/v$ZSTD_VERSION/zstd-$ZSTD_VERSION.tar.gz" \
 	 	| tar  -zxf - -C deps/zstd --strip-components 1
