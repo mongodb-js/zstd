@@ -2,13 +2,19 @@
 ARG PLATFORM=arm64
 ARG NODE_VERSION=16.20.1
 
-FROM ${PLATFORM}/node:${NODE_VERSION}-alpine AS node
+FROM ${PLATFORM}/node:${NODE_VERSION}-alpine AS build
 
 WORKDIR /zstd
 COPY . .
 
 RUN apk --no-cache add make g++ libc-dev curl bash python3 py3-pip vim cmake
 RUN npm run install-zstd && npm i
+RUN npm run prebuild
 
 ARG RUN_TEST
 RUN if [ -n "$RUN_TEST" ]; then npm test ; else echo "skipping tests" ; fi
+
+
+FROM scratch
+
+COPY --from=build /zstd/prebuilds/ /

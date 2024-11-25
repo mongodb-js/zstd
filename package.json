@@ -38,7 +38,8 @@
     "install-zstd": "bash etc/install-zstd.sh",
     "check:eslint": "ESLINT_USE_FLAT_CONFIG=false eslint *ts lib/*.js test/*.js .*.json",
     "clang-format": "clang-format --style=file:.clang-format --Werror -i addon/*",
-    "check:clang-format": "clang-format --style=file:.clang-format --dry-run --Werror addon/*"
+    "check:clang-format": "clang-format --style=file:.clang-format --dry-run --Werror addon/*",
+    "prebuild": "prebuild --runtime napi --strip --verbose --all"
   },
   "overrides": {
     "prebuild": {
@@ -49,5 +50,6 @@
     "napi_versions": [
       4
     ]
-  }
+  },
+  "mongodb:zstd_version": "1.5.6"
 }

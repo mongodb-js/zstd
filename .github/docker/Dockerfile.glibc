@@ -17,6 +17,11 @@ RUN python3 --version
 
 RUN npm run install-zstd
 RUN npm install
+RUN npm run prebuild
 
 ARG RUN_TEST
 RUN if [ -n "$RUN_TEST" ]; then npm test ; else echo "skipping tests" ; fi
+
+FROM scratch
+
+COPY --from=build /zstd/prebuilds/ /
