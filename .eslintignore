@@ -1,3 +1,4 @@
 !.eslintrc.json
 !.mocharc.json
 !.prettierrc.json
+!.release-please-manifest.json
