@@ -88,19 +88,19 @@ jobs:
           product_name: "@mongodb-js/zstd"
           dry_run: ${{ needs.release_please.outputs.release_created == '' }}
 
-  # publish:
-  #   needs: [release_please, ssdlc, build]
-  #   environment: release
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
+  publish:
+    needs: [release_please, ssdlc, build]
+    environment: release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
 
-  #     - name: Install Node and dependencies
-  #       uses: mongodb-labs/drivers-github-tools/node/setup@v2
-  #       with:
-  #         ignore_install_scripts: true
+      - name: Install Node and dependencies
+        uses: mongodb-labs/drivers-github-tools/node/setup@v2
+        with:
+          ignore_install_scripts: true
 
-  #     - run: npm publish --provenance
-  #       if: ${{ needs.release_please.outputs.release_created }}
-  #       env:
-  #         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: npm publish --provenance
+        if: ${{ needs.release_please.outputs.release_created }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
