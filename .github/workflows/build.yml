@@ -44,8 +44,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        linux_arch: [amd64]
-        # linux_arch: [s390x, arm64, amd64]
+        linux_arch: [s390x, arm64, amd64]
       fail-fast: false
     steps:
       - uses: actions/checkout@v4
@@ -85,8 +84,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        linux_arch: [amd64]
-        # linux_arch: [amd64, arm64]
+        linux_arch: [amd64, arm64]
       fail-fast: false
     steps:
       - uses: actions/checkout@v4
