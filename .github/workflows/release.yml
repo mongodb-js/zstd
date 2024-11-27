@@ -63,7 +63,6 @@ jobs:
         if: ${{ 'node-zstd' == '' }}
         run: cp sbom.json ${{ env.S3_ASSETS }}/sbom.json
 
-      # only used for mongodb-client-encryption
       - name: Augment SBOM and copy to release assets
         if: ${{ 'node-zstd' != '' }}
         uses: mongodb-labs/drivers-github-tools/sbom@v2
