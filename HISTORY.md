@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [v2.0.0-alpha.0](https://github.com/mongodb-js/zstd/compare/v1.2.2...v2.0.0-alpha.0) (2024-11-27)
+
+### Features
+
+* **NODE-4569:** add "musl" builds for Alpine Linux ([#12](https://github.com/mongodb-js/zstd/issues/12)) ([b3dedc3](https://github.com/mongodb-js/zstd/commit/b3dedc31a274df1eecb54b9092c8dd270f31c21c))
+* **NODE-6539:** add base napi C++ template with standard Node team tooling ([#28](https://github.com/mongodb-js/zstd/issues/28)) ([8c40b08](https://github.com/mongodb-js/zstd/commit/8c40b08782969c87b85d5d1bea0a753db73cc87f))
+* **NODE-6540:** Add c++ zstd compression API ([#30](https://github.com/mongodb-js/zstd/issues/30)) ([6673245](https://github.com/mongodb-js/zstd/commit/667324522600abc6f731b54a9d9a7c6e92954bef))
+* **NODE-6588:** add ssdlc to zstd ([#43](https://github.com/mongodb-js/zstd/issues/43)) ([016d857](https://github.com/mongodb-js/zstd/commit/016d857ccb76f01ebaf18e01756b571338723a16))
+
 ### [1.2.2](https://github.com/mongodb-js/zstd/compare/v1.2.1...v1.2.2) (2024-09-16)
 
 
