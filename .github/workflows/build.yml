@@ -34,7 +34,7 @@ jobs:
         name: Upload prebuild
         uses: actions/upload-artifact@v4
         with:
-          name: build-${{ matrix.os }}
+          name: build-${{ matrix.os }}.tar.gz
           path: prebuilds/
           if-no-files-found: "error"
           retention-days: 1
@@ -75,7 +75,7 @@ jobs:
         name: Upload prebuild
         uses: actions/upload-artifact@v4
         with:
-          name: build-linux-glibc-${{ matrix.linux_arch }}
+          name: build-linux-glibc-${{ matrix.linux_arch }}.tar.gz
           path: prebuilds/
           if-no-files-found: "error"
           retention-days: 1
@@ -116,7 +116,7 @@ jobs:
         name: Upload prebuild
         uses: actions/upload-artifact@v4
         with:
-          name: build-linux-musl-${{ matrix.linux_arch }}
+          name: build-linux-musl-${{ matrix.linux_arch }}.tar.gz
           path: prebuilds/
           if-no-files-found: "error"
           retention-days: 1
