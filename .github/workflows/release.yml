@@ -44,19 +44,12 @@ jobs:
           ignore_install_scripts: true
 
       - name: Load version and package info
-        uses: baileympearson/drivers-github-tools/node/get_version_info@no-story-files
+        uses: mongodb-labs/drivers-github-tools/node/get_version_info@v2
         with:
           npm_package_name: "@mongodb-js/zstd"
 
-      # - name: Set up drivers-github-tools
-      #   uses: mongodb-labs/drivers-github-tools/setup@v2
-      #   with:
-      #     aws_region_name: ${{ inputs.aws_region_name }}
-      #     aws_role_arn: ${{ inputs.aws_role_arn }}
-      #     aws_secret_id: ${{ inputs.aws_secret_id }}
-
       - name: actions/compress_sign_and_upload
-        uses: baileympearson/drivers-github-tools/node/sign_node_package@no-story-files
+        uses: mongodb-labs/drivers-github-tools/node/sign_node_package@v2
         with:
           aws_role_arn: ${{ secrets.AWS_ROLE_ARN }}
           aws_region_name: us-east-1
