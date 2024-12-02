@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.1-alpha.0](https://github.com/mongodb-js/zstd/compare/v2.0.0-alpha.0...v2.0.1-alpha.0) (2024-12-02)
+
+
+### Bug Fixes
+
+* **NODE-6590:** specify correct entrypoint in package.json and include binding.gyp in the package ([#47](https://github.com/mongodb-js/zstd/issues/47)) ([f562b59](https://github.com/mongodb-js/zstd/commit/f562b59dea298ebf22a54106d71d3cf61b7fa8df))
+
 ## [v2.0.0-alpha.0](https://github.com/mongodb-js/zstd/compare/v1.2.2...v2.0.0-alpha.0) (2024-11-27)
 
 ### Features
