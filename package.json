@@ -1,13 +1,14 @@
 {
   "name": "@mongodb-js/zstd",
   "version": "2.0.0-alpha.0",
-  "main": "index.js",
+  "main": "lib/index.js",
   "types": "index.d.ts",
   "repository": "https://github.com/mongodb-js/zstd",
   "files": [
     "index.d.ts",
     "lib/index.js",
-    "addon/*"
+    "addon/*",
+    "binding.gyp"
   ],
   "dependencies": {
     "node-addon-api": "^4.3.0",
