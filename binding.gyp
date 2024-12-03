@@ -34,6 +34,19 @@
               ]
             },
           }
+        ],
+        ['OS=="mac"', {
+          'xcode_settings': {
+            "OTHER_CFLAGS": [
+              "-arch x86_64",
+              "-arch arm64"
+            ],
+            "OTHER_LDFLAGS": [
+              "-arch x86_64",
+              "-arch arm64"
+            ]
+          }
+        }
         ]
       ],
     'cflags!': [ '-fno-exceptions' ],
