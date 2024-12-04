@@ -7,8 +7,8 @@ clean_deps() {
 }
 
 download_zstd() {
-	rm -rf deps
-	mkdir -p deps/zstd
+	mkdkr deps
+	mkdir deps/zstd
 	ZSTD_VERSION=$(node -p "require('./package.json')['mongodb:zstd_version']")
 
 	curl -L "https://github.com/facebook/zstd/releases/download/v$ZSTD_VERSION/zstd-$ZSTD_VERSION.tar.gz" \
