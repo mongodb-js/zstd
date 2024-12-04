@@ -28,7 +28,7 @@ jobs:
         run: npm run install-zstd
         shell: bash
 
-      - name: install dependencies and compmile
+      - name: install dependencies and compile
         run: npm install --loglevel verbose
         shell: bash
 

@@ -23,9 +23,12 @@
           {
             'link_settings': {
               'libraries': [
-                '<(module_root_dir)/deps/zstd/build/cmake/lib/Debug/zstd_static.lib'
+                '<(module_root_dir)/deps/zstd/static/zstd_static.lib'
               ]
             },
+            'include_dirs': [
+              '<(module_root_dir)/deps/zstd/include'
+            ],
           },
           { # macos and linux
           'link_settings': {
