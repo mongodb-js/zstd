@@ -26,8 +26,11 @@ download_zstd() {
 		download_windows
 		exit 0 # no need to build windows
 	else
-		# -C -> specifies the output location
-		# --strip-components -> removes one level of directory nesting
+		# tar flags
+		#     -C specifies the output location
+		#     --strip-components removes one level of directory nesting
+		# curl flags
+		#     -L follows redirects
 		curl -L "https://github.com/facebook/zstd/releases/download/v$ZSTD_VERSION/zstd-$ZSTD_VERSION.tar.gz" \
 	 	| 	tar -zxf - -C deps/zstd --strip-components 1
 	fi
