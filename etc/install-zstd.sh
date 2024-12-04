@@ -11,9 +11,12 @@ download_zstd() {
 	ZSTD_VERSION=$(node -p "require('./package.json')['mongodb:zstd_version']")
 	is_windows=$(node -p "process.platform === 'win32'")
 
-	if [ "$is_windows" == "true" ]; then
-		curl -L "https://github.com/facebook/zstd/releases/download/v$ZSTD_VERSION/zstd-$ZSTD_VERSION-win64.zip" \
-	 	| 	unzip - -C deps/zstd 
+	if [ "$is_windows" == "false" ]; then
+		curl -L -o zstd.zip "https://github.com/facebook/zstd/releases/download/v$ZSTD_VERSION/zstd-v$ZSTD_VERSION-win64.zip"
+	 	unzip zstd.zip 
+		cp -r zstd-v$ZSTD_VERSION-win64/* deps/zstd
+		rm zstd.zip
+		rm -rf zstd-v$ZSTD_VERSION-win64
 	else
 		curl -L "https://github.com/facebook/zstd/releases/download/v$ZSTD_VERSION/zstd-$ZSTD_VERSION.tar.gz" \
 	 	| 	tar  -zxf - -C deps/zstd --strip-components 1
@@ -32,4 +35,4 @@ build_zstd() {
 
 clean_deps
 download_zstd
-build_zstd
+# build_zstd
