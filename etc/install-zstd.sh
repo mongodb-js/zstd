@@ -1,14 +1,12 @@
 #!/bin/sh
 set -o xtrace
-set -o errexit
 
 clean_deps() {
 	rm -rf deps
 }
 
 download_zstd() {
-	mkdir deps
-	mkdir deps/zstd
+	mkdir -p deps/zstd
 	ZSTD_VERSION=$(node -p "require('./package.json')['mongodb:zstd_version']")
 
 	curl -L "https://github.com/facebook/zstd/releases/download/v$ZSTD_VERSION/zstd-$ZSTD_VERSION.tar.gz" \
