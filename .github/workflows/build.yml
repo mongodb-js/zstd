@@ -1,6 +1,4 @@
 on:
-  pull_request:
-    branches: [main]
   workflow_dispatch: {}
   workflow_call: {}
 
@@ -10,7 +8,7 @@ jobs:
   host_tests:
     strategy:
       matrix:
-        os: [macos-latest, windows-2019]
+        os: [macos-latest, windows-2019, macos-13]
       fail-fast: false
     runs-on: ${{ matrix.os }}
     steps:
