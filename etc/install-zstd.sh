@@ -6,12 +6,23 @@ clean_deps() {
 	rm -rf deps
 }
 
+download_zstd_windows() {
+	curl -L "https://github.com/facebook/zstd/releases/download/v$ZSTD_VERSION/zstd-$ZSTD_VERSION-win64.zip" \
+	 	| tar  -zxf - -C deps/zstd --strip-components 1
+}
+
 download_zstd() {
 	mkdir -p deps/zstd
 	ZSTD_VERSION=$(node -p "require('./package.json')['mongodb:zstd_version']")
+	is_windows=$(node -p "process.platform === 'win32'")
 
-	curl -L "https://github.com/facebook/zstd/releases/download/v$ZSTD_VERSION/zstd-$ZSTD_VERSION.tar.gz" \
+
+	if [ "$is_windows" == "true" ]; then
+		download_zstd_windows
+	else
+		curl -L "https://github.com/facebook/zstd/releases/download/v$ZSTD_VERSION/zstd-$ZSTD_VERSION.tar.gz" \
 	 	| tar  -zxf - -C deps/zstd --strip-components 1
+	fi
 }
 
 build_zstd() {
