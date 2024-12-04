@@ -21,7 +21,7 @@ build_zstd() {
 
 	# CMAKE_RC_FLAGS is a workaround for a bug in 1.5.6 that breaks compilation on windows.
 	# The fix is merged but not yet released. see https://github.com/facebook/zstd/issues/3999
-	cmake -DCMAKE_RC_FLAGS="$(pwd)/lib" -DZSTD_MULTITHREAD_SUPPORT=OFF -DZSTD_BUILD_SHARED=OFF -DCMAKE_OSX_ARCHITECTURES=x86_64;arm64 .
+	cmake -DCMAKE_RC_FLAGS="$(pwd)/lib" -DZSTD_MULTITHREAD_SUPPORT=OFF -DZSTD_BUILD_SHARED=OFF -DCMAKE_OSX_ARCHITECTURES='x86_64;arm64' .
 	cmake --build .
 }
 
