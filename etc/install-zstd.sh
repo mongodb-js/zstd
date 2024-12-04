@@ -24,6 +24,7 @@ download_zstd() {
 
 	if [ "$is_windows" == "true" ]; then
 		download_windows
+		exit 0 # no need to build windows
 	else
 		# -C -> specifies the output location
 		# --strip-components -> removes one level of directory nesting
