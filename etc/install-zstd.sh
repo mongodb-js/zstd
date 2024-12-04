@@ -7,7 +7,7 @@ clean_deps() {
 }
 
 download_zstd() {
-	mkdkr deps
+	mkdir deps
 	mkdir deps/zstd
 	ZSTD_VERSION=$(node -p "require('./package.json')['mongodb:zstd_version']")
 
