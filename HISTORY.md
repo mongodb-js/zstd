@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [2.0.1-alpha.1](https://github.com/mongodb-js/zstd/compare/v2.0.0-alpha.1...v2.0.1-alpha.1) (2024-12-04)
+## [2.0.0-alpha.2](https://github.com/mongodb-js/zstd/compare/v2.0.0-alpha.1...v2.0.0-alpha.2) (2024-12-04)
 
 
 ### Bug Fixes
