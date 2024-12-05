@@ -38,20 +38,6 @@ No verification is done when using npm to install the package. The contents of t
 
 To verify the native `.node` packages, follow the same steps as above using `mongodb-js-zstd-X.Y.Z-platform.tgz` and the corresponding `.sig` file.
 
-
-## OS Support matrix
-
-|                  | node12 | node14 | node16 | node18 | node20 |
-| ---------------- | ------ | ------ | ------ | ------ | ------ |
-| Windows x64      | ✓      | ✓      | ✓      | ✓      | ✓      |
-| macOS x64        | ✓      | ✓      | ✓      | ✓      | ✓      |
-| macOS arm64      | ✓      | ✓      | ✓      | ✓      | ✓      |
-| Linux x64 gnu    | ✓      | ✓      | ✓      | ✓      | ✓      |
-| Linux arm gnu    | ✓      | ✓      | ✓      | ✓      | ✓      |
-| Linux arm64 gnu  | ✓      | ✓      | ✓      | ✓      | ✓      |
-| Linux x64 musl   | ✓      | ✓      | ✓      | ✓      | ✓      |
-| Linux arm64 musl | ✓      | ✓      | ✓      | ✓      | ✓      |
-
 ## MongoDB Node.js Driver Version Compatibility
 
 Only the following version combinations with the [MongoDB Node.js Driver](https://github.com/mongodb/node-mongodb-native) are considered stable.
@@ -63,6 +49,24 @@ Only the following version combinations with the [MongoDB Node.js Driver](https:
 | `mongodb@5.x`    | ✓                      | N/A                    |
 | `mongodb@4.x`    | ✓                      | N/A                    |
 | `mongodb@3.x`    | N/A                    | N/A                    |
+
+#### Prebuild Platforms
+
+Below are the platforms that are available as prebuilds on each github release.
+`prebuild-install` downloads these automatically depending on the platform you are running npm install on.
+
+- Linux GLIBC 2.23 or later
+    - s390x
+    - arm64
+    - x64
+- Linux MUSL 1.1.20
+    - arm64
+    - x64
+- MacOS universal binary
+    - x64
+    - arm64
+- Windows
+    - x64
 
 ## API
 
@@ -106,5 +110,9 @@ First, install and build the zstd library:
 
 `npm run install-zstd`
 
-Then:
+Then build the bindings:
+
+`npm run prebuild`
+
+Then test:
 `npm test`
