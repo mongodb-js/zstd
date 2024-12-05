@@ -1,6 +1,6 @@
 # @mongodb-js/zstd
 
-[![CI](https://github.com/mongodb-js/zstd/actions/workflows/CI.yml/badge.svg)](https://github.com/mongodb-js/zstd/actions/workflows/test.yml)
+[![CI](https://github.com/mongodb-js/zstd/actions/workflows/test.yml/badge.svg)](https://github.com/mongodb-js/zstd/actions/workflows/test.yml)
 
 Zstandard compression library for Node.js
 
@@ -62,6 +62,9 @@ Only the following version combinations with the [MongoDB Node.js Driver](https:
 | `mongodb@5.x` | ✓                      |
 | `mongodb@4.x` | ✓                      |
 | `mongodb@3.x` | N/A                    |
+
+`@mongodb-js/zstd@2.x` is compatible with `mongodb@6.11` and above.  `@mongodb-js/zstd@2.x` will work with
+older versions of mongodb, but will produce peer dependency errors upon installation.
 
 ## API
 
