@@ -1,6 +1,6 @@
 # @mongodb-js/zstd
 
-[![CI](https://github.com/mongodb-js/zstd/actions/workflows/CI.yml/badge.svg)](https://github.com/mongodb-js/zstd/actions/workflows/CI.yml)
+[![CI](https://github.com/mongodb-js/zstd/actions/workflows/test.yml/badge.svg)](https://github.com/mongodb-js/zstd/actions/workflows/test.yml)
 
 Zstandard compression library for Node.js
 
@@ -56,12 +56,13 @@ To verify the native `.node` packages, follow the same steps as above using `mon
 
 Only the following version combinations with the [MongoDB Node.js Driver](https://github.com/mongodb/node-mongodb-native) are considered stable.
 
-|               | `@mongodb-js/zstd@1.x` |
-| ------------- | ---------------------- |
-| `mongodb@6.x` | ✓ `^1.1.0`           |
-| `mongodb@5.x` | ✓                      |
-| `mongodb@4.x` | ✓                      |
-| `mongodb@3.x` | N/A                    |
+|                  | `@mongodb-js/zstd@1.x` | `@mongodb-js/zstd@2.x` |
+| ---------------- | ---------------------- | ---------------------- |
+| `mongodb@>=6.11` | ✓ `^1.1.0`             | `^2.0.0`               |
+| `mongodb@<6.11`  | ✓ `^1.1.0`             | N/A                    |
+| `mongodb@5.x`    | ✓                      | N/A                    |
+| `mongodb@4.x`    | ✓                      | N/A                    |
+| `mongodb@3.x`    | N/A                    | N/A                    |
 
 ## API
 
