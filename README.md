@@ -64,8 +64,6 @@ Only the following version combinations with the [MongoDB Node.js Driver](https:
 | `mongodb@4.x`    | ✓                      | N/A                    |
 | `mongodb@3.x`    | N/A                    | N/A                    |
 
-`@mongodb-js/zstd@2.x` will work with `mongodb@<6.11` but will produce peer dependency errors upon installation.
-
 ## API
 
 ```ts
