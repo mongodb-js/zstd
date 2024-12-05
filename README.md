@@ -44,8 +44,8 @@ Only the following version combinations with the [MongoDB Node.js Driver](https:
 
 |                  | `@mongodb-js/zstd@1.x` | `@mongodb-js/zstd@2.x` |
 | ---------------- | ---------------------- | ---------------------- |
-| `mongodb@>=6.11` | ✓ `^1.1.0`             | `^2.0.0`               |
-| `mongodb@<6.11`  | ✓ `^1.1.0`             | N/A                    |
+| `mongodb@>=6.12` | ✓ `^1.1.0`             | `^2.0.0`               |
+| `mongodb@<6.12`  | ✓ `^1.1.0`             | N/A                    |
 | `mongodb@5.x`    | ✓                      | N/A                    |
 | `mongodb@4.x`    | ✓                      | N/A                    |
 | `mongodb@3.x`    | N/A                    | N/A                    |
