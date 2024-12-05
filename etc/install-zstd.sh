@@ -40,7 +40,7 @@ build_zstd() {
 	    ../build/cmake 
 
 	cmake --build .  --target libzstd_static
-	objdump --syms lib/Debug/zstd_static.lib
+	objdump --syms lib/Debug/zstd_static.lib | grep debug
 }
 
 clean_deps
