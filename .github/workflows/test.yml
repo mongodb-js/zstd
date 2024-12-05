@@ -29,7 +29,7 @@ jobs:
         shell: bash
 
       - name: install dependencies and compile
-        run: npm install --loglevel verbose
+        run: npm install --ignore-scripts --loglevel verbose && npm run prebuild
         shell: bash
 
       - name: Test ${{ matrix.os }}
