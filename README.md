@@ -108,12 +108,3 @@ First, install and build the zstd library:
 
 Then:
 `npm test`
-
-## Releasing
-
-CI will automatically publish when it detects a new release after:
-
-```
-npm run release -- --release-as <patch|minor|major>
-git push --follow-tags origin main
-```
