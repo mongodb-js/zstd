@@ -1,6 +1,6 @@
 # @mongodb-js/zstd
 
-[![CI](https://github.com/mongodb-js/zstd/actions/workflows/CI.yml/badge.svg)](https://github.com/mongodb-js/zstd/actions/workflows/CI.yml)
+[![CI](https://github.com/mongodb-js/zstd/actions/workflows/CI.yml/badge.svg)](https://github.com/mongodb-js/zstd/actions/workflows/test.yml)
 
 Zstandard compression library for Node.js
 
