@@ -56,15 +56,15 @@ To verify the native `.node` packages, follow the same steps as above using `mon
 
 Only the following version combinations with the [MongoDB Node.js Driver](https://github.com/mongodb/node-mongodb-native) are considered stable.
 
-|               | `@mongodb-js/zstd@1.x` |
-| ------------- | ---------------------- |
-| `mongodb@6.x` | ✓ `^1.1.0`           |
-| `mongodb@5.x` | ✓                      |
-| `mongodb@4.x` | ✓                      |
-| `mongodb@3.x` | N/A                    |
+|                  | `@mongodb-js/zstd@1.x` |
+| ---------------- | ---------------------- |
+| `mongodb@>=6.11` | ✓ `^1.1.0` `^2.0.0`    |
+| `mongodb@<6.11`  | ✓ `^1.1.0`             |
+| `mongodb@5.x`    | ✓                      |
+| `mongodb@4.x`    | ✓                      |
+| `mongodb@3.x`    | N/A                    |
 
-`@mongodb-js/zstd@2.x` is compatible with `mongodb@6.11` and above.  `@mongodb-js/zstd@2.x` will work with
-older versions of mongodb, but will produce peer dependency errors upon installation.
+`@mongodb-js/zstd@2.x` will work with `mongodb@<6.11` but will produce peer dependency errors upon installation.
 
 ## API
 
