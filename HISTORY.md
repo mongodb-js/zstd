@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [2.0.0-alpha.3](https://github.com/mongodb-js/zstd/compare/v2.0.0-alpha.2...v2.0.0-alpha.3) (2024-12-05)
 
+### Bug Fixes
+
+* bundle release build on windows ([#59](https://github.com/mongodb-js/zstd/issues/59)) ([999c506](https://github.com/mongodb-js/zstd/commit/999c5064f7e1033a889b4e1d9b3cd491a5ec2ff9))
+
+## [2.0.0-alpha.3](https://github.com/mongodb-js/zstd/compare/v2.0.0-alpha.2...v2.0.0-alpha.3) (2024-12-05)
+
 ## [2.0.0-alpha.2](https://github.com/mongodb-js/zstd/compare/v2.0.0-alpha.1...v2.0.0-alpha.2) (2024-12-04)
 
 
