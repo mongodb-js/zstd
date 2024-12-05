@@ -39,7 +39,7 @@ build_zstd() {
 		-DCMAKE_BUILD_TYPE=Release \
 	    ../build/cmake 
 
-	cmake --build .  --target libzstd_static
+	cmake --build .  --target libzstd_static --config Release
 	objdump --syms lib/Debug/zstd_static.lib | grep debug
 }
 
