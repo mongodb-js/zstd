@@ -50,6 +50,24 @@ Only the following version combinations with the [MongoDB Node.js Driver](https:
 | `mongodb@4.x`    | ✓                      | N/A                    |
 | `mongodb@3.x`    | N/A                    | N/A                    |
 
+#### Prebuild Platforms
+
+Below are the platforms that are available as prebuilds on each github release.
+`prebuild-install` downloads these automatically depending on the platform you are running npm install on.
+
+- Linux GLIBC 2.23 or later
+    - s390x
+    - arm64
+    - x64
+- Linux MUSL 1.1.20
+    - arm64
+    - x64
+- MacOS universal binary
+    - x64
+    - arm64
+- Windows
+    - x64
+
 ## API
 
 ```ts
