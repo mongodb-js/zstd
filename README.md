@@ -38,20 +38,6 @@ No verification is done when using npm to install the package. The contents of t
 
 To verify the native `.node` packages, follow the same steps as above using `mongodb-js-zstd-X.Y.Z-platform.tgz` and the corresponding `.sig` file.
 
-
-## OS Support matrix
-
-|                  | node12 | node14 | node16 | node18 | node20 |
-| ---------------- | ------ | ------ | ------ | ------ | ------ |
-| Windows x64      | ✓      | ✓      | ✓      | ✓      | ✓      |
-| macOS x64        | ✓      | ✓      | ✓      | ✓      | ✓      |
-| macOS arm64      | ✓      | ✓      | ✓      | ✓      | ✓      |
-| Linux x64 gnu    | ✓      | ✓      | ✓      | ✓      | ✓      |
-| Linux arm gnu    | ✓      | ✓      | ✓      | ✓      | ✓      |
-| Linux arm64 gnu  | ✓      | ✓      | ✓      | ✓      | ✓      |
-| Linux x64 musl   | ✓      | ✓      | ✓      | ✓      | ✓      |
-| Linux arm64 musl | ✓      | ✓      | ✓      | ✓      | ✓      |
-
 ## MongoDB Node.js Driver Version Compatibility
 
 Only the following version combinations with the [MongoDB Node.js Driver](https://github.com/mongodb/node-mongodb-native) are considered stable.
@@ -106,5 +92,9 @@ First, install and build the zstd library:
 
 `npm run install-zstd`
 
-Then:
+Then build the bindings:
+
+`npm run prebuild`
+
+Then test:
 `npm test`
