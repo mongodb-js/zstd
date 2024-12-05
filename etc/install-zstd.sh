@@ -1,5 +1,6 @@
 #!/bin/sh
 set -o xtrace
+set -o errexit
 
 clean_deps() {
 	rm -rf deps
