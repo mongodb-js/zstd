@@ -23,7 +23,7 @@
           {
             'link_settings': {
               'libraries': [
-                '<(module_root_dir)/deps/zstd/out/lib/Debug/zstd_static.lib'
+                '<(module_root_dir)/deps/zstd/out/lib/Release/zstd_static.lib'
               ]
             },
           },
