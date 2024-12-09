@@ -49,7 +49,7 @@ jobs:
           npm_package_name: "@mongodb-js/zstd"
 
       - name: actions/compress_sign_and_upload
-        uses: baileympearson/drivers-github-tools/node/sign_node_package#fle-expansions
+        uses: baileympearson/drivers-github-tools/node/sign_node_package@fle-expansions
         with:
           aws_role_arn: ${{ secrets.AWS_ROLE_ARN }}
           aws_region_name: us-east-1
