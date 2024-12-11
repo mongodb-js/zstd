@@ -50,6 +50,9 @@ Only the following version combinations with the [MongoDB Node.js Driver](https:
 | `mongodb@4.x`    | ✓                      | N/A                    |
 | `mongodb@3.x`    | N/A                    | N/A                    |
 
+>[!Note]
+> `@mongodb-js/zstd@1.x` is deprecated - please use `@mongodb-js/zstd@2.x` instead.
+
 #### Prebuild Platforms
 
 Below are the platforms that are available as prebuilds on each github release.
