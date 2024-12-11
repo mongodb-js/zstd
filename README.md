@@ -40,9 +40,6 @@ To verify the native `.node` packages, follow the same steps as above using `mon
 
 ## MongoDB Node.js Driver Version Compatibility
 
->[!Note]
-`@mongodb-js/zstd@1.x` is deprecated - please use `@mongodb-js/zstd@2.x` instead.
-
 Only the following version combinations with the [MongoDB Node.js Driver](https://github.com/mongodb/node-mongodb-native) are considered stable.
 
 |                  | `@mongodb-js/zstd@1.x` | `@mongodb-js/zstd@2.x` |
@@ -52,6 +49,9 @@ Only the following version combinations with the [MongoDB Node.js Driver](https:
 | `mongodb@5.x`    | ✓                      | N/A                    |
 | `mongodb@4.x`    | ✓                      | N/A                    |
 | `mongodb@3.x`    | N/A                    | N/A                    |
+
+>[!Note]
+> `@mongodb-js/zstd@1.x` is deprecated - please use `@mongodb-js/zstd@2.x` instead.
 
 #### Prebuild Platforms
 
