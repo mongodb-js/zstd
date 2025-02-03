@@ -23,7 +23,7 @@
     "eslint": "^9.19.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.3",
-    "mocha": "^10.8.2",
+    "mocha": "^11.1.0",
     "node-gyp": "10.1.0",
     "prebuild": "^13.0.1",
     "prettier": "^3.4.2"
