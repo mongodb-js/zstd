@@ -12,16 +12,16 @@
   ],
   "dependencies": {
     "node-addon-api": "^4.3.0",
-    "prebuild-install": "^7.1.2"
+    "prebuild-install": "^7.1.3"
   },
   "license": "Apache-2.0",
   "devDependencies": {
     "@mongodb-js/zstd": "^1.2.0",
-    "@typescript-eslint/eslint-plugin": "^8.22.0",
+    "@typescript-eslint/eslint-plugin": "^8.23.0",
     "@wasm-fmt/clang-format": "^19.1.7",
     "chai": "^4.5.0",
     "eslint": "^9.19.0",
-    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.2.3",
     "mocha": "^10.8.2",
     "node-gyp": "10.1.0",
