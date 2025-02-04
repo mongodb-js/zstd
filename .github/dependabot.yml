@@ -25,7 +25,14 @@ updates:
         versions: [">=16.0.0"]
       # we ignore TS as a part of quarterly dependency updates.
       - dependency-name: "typescript"
-    allow:
+
+      # drops support for node 16
+      - dependency-name: "node-gyp"
+        versions: [">=11.0.0"]
+      - dependency-name: "mocha"
+        versions: [">=11.0.0"]
+
+      allow:
       - dependency-type: "development"
       
     groups:
