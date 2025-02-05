@@ -17,13 +17,13 @@ RUN apt-get -qq install -y build-essential
 RUN apt-get -qq install -y curl
 RUN apt-get -qq install -y cmake
 
-RUN "PRINTING DEPENDENCY INFORMATION"
+RUN echo "PRINTING DEPENDENCY INFORMATION"
 RUN python3 --version
 RUN node --version
 
 RUN npm run install-zstd
 
-RUN "ZSTD INSTALLED AND BUILT."
+RUN echo "ZSTD INSTALLED AND BUILT."
 RUN npm install
 RUN npm run prebuild
 
