@@ -12,10 +12,18 @@ WORKDIR /zstd
 COPY . .
 
 RUN apt-get -qq update
-RUN apt-get -qq install -y python3 build-essential curl cmake
+RUN apt-get -qq install -y python3
+RUN apt-get -qq install -y build-essential
+RUN apt-get -qq install -y curl
+RUN apt-get -qq install -y cmake
+
+RUN "PRINTING DEPENDENCY INFORMATION"
 RUN python3 --version
+RUN node --version
 
 RUN npm run install-zstd
+
+RUN "ZSTD INSTALLED AND BUILT."
 RUN npm install
 RUN npm run prebuild
 
