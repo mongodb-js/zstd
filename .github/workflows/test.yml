@@ -57,15 +57,17 @@ jobs:
         run: |
           echo "version=$(node --print 'process.version.slice(1)')" >> "$GITHUB_OUTPUT"
           echo "ubuntu_version=$(node --print '(+process.version.slice(1).split(`.`).at(0)) > 16 ? `noble` : `bionic`')" >> "$GITHUB_OUTPUT"
-
+          
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
+        with:
+          image: tonistiigi/binfmt@sha256:66e11bea77a5ea9d6f0fe79b57cd2b189b5d15b93a2bdb925be22949232e4e55
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
         with:
-          driver-opts: image=moby/buildkit:v0.18.1
-          version: v0.19.2
+          version: v0.18.0
+          driver-opts: image=moby/buildkit:v0.17.2
 
       - name: Run Buildx
         run: |
@@ -80,43 +82,45 @@ jobs:
             -f ./.github/docker/Dockerfile.glibc \
             .
 
-  # container_tests_musl:
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     matrix:
-  #       linux_arch: [amd64, arm64]
-  #       node: [16.20.1, 18.x, 20.x, 22.x]
-  #     fail-fast: false
-  #   steps:
-  #     - uses: actions/checkout@v4
+  container_tests_musl:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        linux_arch: [amd64, arm64]
+        node: [16.20.1, 18.x, 20.x, 22.x]
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v4
 
-  #     - uses: actions/setup-node@v4
-  #       with:
-  #         node-version: ${{ matrix.node }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
 
-  #     - name: Get Full Node.js Version
-  #       id: get_nodejs_version
-  #       shell: bash
-  #       run: |
-  #         echo "version=$(node --print 'process.version.slice(1)')" >> "$GITHUB_OUTPUT"
+      - name: Get Full Node.js Version
+        id: get_nodejs_version
+        shell: bash
+        run: |
+          echo "version=$(node --print 'process.version.slice(1)')" >> "$GITHUB_OUTPUT"
 
-  #     - name: Set up QEMU
-  #       uses: docker/setup-qemu-action@v3
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+        with:
+          image: tonistiigi/binfmt@sha256:66e11bea77a5ea9d6f0fe79b57cd2b189b5d15b93a2bdb925be22949232e4e55
 
-  #     - name: Set up Docker Buildx
-  #       uses: docker/setup-buildx-action@v3
-  #       with:
-  #         driver-opts: image=moby/buildkit:v0.18.1
-  #         version: v0.19.2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        with:
+          version: v0.18.0
+          driver-opts: image=moby/buildkit:v0.17.2
 
-  #     - name: Run Buildx
-  #       run: |
-  #         docker buildx create --name builder --bootstrap --use
-  #         docker --debug buildx build --progress=plain --no-cache \
-  #           --platform linux/${{ matrix.linux_arch }} \
-  #           --build-arg="PLATFORM=${{ matrix.linux_arch == 'arm64' && 'arm64v8' || matrix.linux_arch }}" \
-  #           --build-arg="NODE_VERSION=${{ steps.get_nodejs_version.outputs.version }}" \
-  #           --build-arg="RUN_TEST=true" \
-  #           --output type=local,dest=./prebuilds,platform-split=false \
-  #           -f ./.github/docker/Dockerfile.musl \
-  #           .
+      - name: Run Buildx
+        run: |
+          docker buildx create --name builder --bootstrap --use
+          docker --debug buildx build --progress=plain --no-cache \
+            --platform linux/${{ matrix.linux_arch }} \
+            --build-arg="PLATFORM=${{ matrix.linux_arch == 'arm64' && 'arm64v8' || matrix.linux_arch }}" \
+            --build-arg="NODE_VERSION=${{ steps.get_nodejs_version.outputs.version }}" \
+            --build-arg="RUN_TEST=true" \
+            --output type=local,dest=./prebuilds,platform-split=false \
+            -f ./.github/docker/Dockerfile.musl \
+            .
