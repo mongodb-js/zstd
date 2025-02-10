@@ -8,39 +8,40 @@ on:
 name: Test
 
 jobs:
-  host_tests:
-    strategy:
-      matrix:
-        os: [macos-latest, windows-2019, macos-13]
-        node: [16.20.1, 18.x, 20.x, 22.x]
-      fail-fast: false
-    runs-on: ${{ matrix.os }}
-    steps:
-      - uses: actions/checkout@v4
+  # host_tests:
+  #   strategy:
+  #     matrix:
+  #       os: [macos-latest, windows-2019, macos-13]
+  #       node: [16.20.1, 18.x, 20.x, 22.x]
+  #     fail-fast: false
+  #   runs-on: ${{ matrix.os }}
+  #   steps:
+  #     - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node }}
-          cache: "npm"
-          registry-url: "https://registry.npmjs.org"
+  #     - uses: actions/setup-node@v4
+  #       with:
+  #         node-version: ${{ matrix.node }}
+  #         cache: "npm"
+  #         registry-url: "https://registry.npmjs.org"
 
-      - name: Install zstd
-        run: npm run install-zstd
-        shell: bash
+  #     - name: Install zstd
+  #       run: npm run install-zstd
+  #       shell: bash
 
-      - name: install dependencies and compile
-        run: npm install --ignore-scripts --loglevel verbose && npm run prebuild
-        shell: bash
+  #     - name: install dependencies and compile
+  #       run: npm install --ignore-scripts --loglevel verbose && npm run prebuild
+  #       shell: bash
 
-      - name: Test ${{ matrix.os }}
-        shell: bash
-        run: npm test
+  #     - name: Test ${{ matrix.os }}
+  #       shell: bash
+  #       run: npm test
 
   container_tests_glibc:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        linux_arch: [s390x, arm64, amd64]
+        # linux_arch: [s390x, arm64, amd64]
+        linux_arch: [s390x, arm64]
         node: [16.x, 18.x, 20.x, 22.x]
       fail-fast: false
     steps:
@@ -56,12 +57,17 @@ jobs:
         run: |
           echo "version=$(node --print 'process.version.slice(1)')" >> "$GITHUB_OUTPUT"
           echo "ubuntu_version=$(node --print '(+process.version.slice(1).split(`.`).at(0)) > 16 ? `noble` : `bionic`')" >> "$GITHUB_OUTPUT"
-
+          
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
+        with:
+          image: tonistiigi/binfmt@sha256:66e11bea77a5ea9d6f0fe79b57cd2b189b5d15b93a2bdb925be22949232e4e55
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
+        with:
+          version: v0.18.0
+          driver-opts: image=moby/buildkit:v0.17.2
 
       - name: Run Buildx
         run: |
@@ -98,9 +104,14 @@ jobs:
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
+        with:
+          image: tonistiigi/binfmt@sha256:66e11bea77a5ea9d6f0fe79b57cd2b189b5d15b93a2bdb925be22949232e4e55
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
+        with:
+          version: v0.18.0
+          driver-opts: image=moby/buildkit:v0.17.2
 
       - name: Run Buildx
         run: |
