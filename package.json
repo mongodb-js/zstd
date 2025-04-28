@@ -17,16 +17,16 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@mongodb-js/zstd": "^1.2.0",
-    "@typescript-eslint/eslint-plugin": "^8.23.0",
+    "@typescript-eslint/eslint-plugin": "^8.29.0",
     "@wasm-fmt/clang-format": "^19.1.7",
     "chai": "^4.5.0",
-    "eslint": "^9.19.0",
-    "eslint-config-prettier": "^10.0.1",
-    "eslint-plugin-prettier": "^5.2.3",
+    "eslint": "^9.23.0",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-prettier": "^5.2.5",
     "mocha": "^10.8.2",
     "node-gyp": "10.1.0",
     "prebuild": "^13.0.1",
-    "prettier": "^3.4.2"
+    "prettier": "^3.5.3"
   },
   "engines": {
     "node": ">= 16.20.1"
