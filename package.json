@@ -18,12 +18,12 @@
   "devDependencies": {
     "@mongodb-js/zstd": "^1.2.0",
     "@typescript-eslint/eslint-plugin": "^8.35.1",
-    "@wasm-fmt/clang-format": "^19.1.7",
+    "@wasm-fmt/clang-format": "^20.1.7",
     "chai": "^4.5.0",
     "eslint": "^9.30.1",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-prettier": "^5.5.1",
-    "mocha": "^10.8.2",
+    "mocha": "^11.7.1",
     "node-gyp": "10.1.0",
     "prebuild": "^13.0.1",
     "prettier": "^3.6.2"
