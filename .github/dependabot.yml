@@ -32,10 +32,13 @@ updates:
       - dependency-name: "mocha"
         versions: [">=11.0.0"]
 
-      allow:
-      - dependency-type: "development"
-      
     groups:
+      prod-dependencies:
+        dependency-type: "production"
+        applies-to: version-updates
+        update-types:
+        - "minor"
+        - "patch"
       development-dependencies:
         dependency-type: "development"
         applies-to: version-updates
