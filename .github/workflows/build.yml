@@ -63,7 +63,7 @@ jobs:
           docker buildx build \
             --platform linux/${{ matrix.linux_arch }} \
             --build-arg="NODE_ARCH=${{ matrix.linux_arch == 'amd64' && 'x64' || matrix.linux_arch }}" \
-            --build-arg="NODE_VERSION=16.20.1" \
+            --build-arg="NODE_VERSION=20.19.0" \
             --output type=local,dest=./prebuilds,platform-split=false \
             -f ./.github/docker/Dockerfile.glibc \
             .
