@@ -1,6 +1,3 @@
-ARG UBUNTU_VERSION=noble
-FROM ubuntu:${UBUNTU_VERSION} AS build
-
 ARG NODE_VERSION=20.19.3
 # Possible values: s390x, arm64, x64
 ARG NODE_ARCH

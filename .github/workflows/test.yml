@@ -55,7 +55,6 @@ jobs:
         shell: bash
         run: |
           echo "version=$(node --print 'process.version.slice(1)')" >> "$GITHUB_OUTPUT"
-          echo "ubuntu_version=$(node --print '(+process.version.slice(1).split(`.`).at(0)) > 16 ? `noble` : `bionic`')" >> "$GITHUB_OUTPUT"
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -70,7 +69,6 @@ jobs:
             --platform linux/${{ matrix.linux_arch }} \
             --build-arg="NODE_ARCH=${{ matrix.linux_arch == 'amd64' && 'x64' || matrix.linux_arch }}" \
             --build-arg="NODE_VERSION=${{ steps.get_nodejs_version.outputs.version }}" \
-            --build-arg="UBUNTU_VERSION=${{ steps.get_nodejs_version.outputs.ubuntu_version }}" \
             --build-arg="RUN_TEST=true" \
             --output type=local,dest=./prebuilds,platform-split=false \
             -f ./.github/docker/Dockerfile.glibc \
