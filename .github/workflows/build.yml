@@ -103,7 +103,7 @@ jobs:
           docker --debug buildx build --progress=plain --no-cache \
             --platform linux/${{ matrix.linux_arch }} \
             --build-arg="PLATFORM=${{ matrix.linux_arch == 'arm64' && 'arm64v8' || matrix.linux_arch }}" \
-            --build-arg="NODE_VERSION=20.19.1" \
+            --build-arg="NODE_VERSION=20.19.0" \
             --output type=local,dest=./prebuilds,platform-split=false \
             -f ./.github/docker/Dockerfile.musl \
             .

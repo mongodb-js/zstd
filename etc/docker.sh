@@ -7,8 +7,7 @@
 # amd64 or arm64v8 for alpine
 LINUX_ARCH=arm64
 
-# 16.20.1+, default 16.20.1
-NODE_VERSION=18.0.0
+NODE_VERSION=20.19.0
 
 SCRIPT_DIR=$(dirname ${BASH_SOURCE:-$0})
 PROJECT_DIR=$SCRIPT_DIR/..
