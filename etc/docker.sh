@@ -27,14 +27,11 @@ build_and_test_musl() {
 build_and_test_glibc() {
     docker buildx create --name builder --bootstrap --use
 
-    UBUNTU_VERSION=ubuntu_version=$(node --print '(process.argv[1].slice(1).split(`.`).at(0)) > 16 ? `noble` : `bionic`' $NODE_VERSION)
     NODE_ARCH=$(node -p 'process.argv[1] === `amd64` && `x64` || process.argv[1]' $LINUX_ARCH)
-    echo $UBUNTU_VERSION
     docker buildx build --progress=plain --no-cache \
             --platform linux/$LINUX_ARCH \
             --build-arg="NODE_ARCH=$NODE_ARCH" \
             --build-arg="NODE_VERSION=$NODE_VERSION" \
-            --build-arg="UBUNTU_VERSION$UBUNTU_VERSION" \
             --build-arg="RUN_TEST=true" \
             --output type=local,dest=./prebuilds,platform-split=false \
             -f ./.github/docker/Dockerfile.glibc \
