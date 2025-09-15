@@ -16,7 +16,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 16.20.1
+          node-version: 20.x
           cache: "npm"
           registry-url: "https://registry.npmjs.org"
 
@@ -63,7 +63,7 @@ jobs:
           docker buildx build \
             --platform linux/${{ matrix.linux_arch }} \
             --build-arg="NODE_ARCH=${{ matrix.linux_arch == 'amd64' && 'x64' || matrix.linux_arch }}" \
-            --build-arg="NODE_VERSION=16.20.1" \
+            --build-arg="NODE_VERSION=20.19.0" \
             --output type=local,dest=./prebuilds,platform-split=false \
             -f ./.github/docker/Dockerfile.glibc \
             .
@@ -103,7 +103,7 @@ jobs:
           docker --debug buildx build --progress=plain --no-cache \
             --platform linux/${{ matrix.linux_arch }} \
             --build-arg="PLATFORM=${{ matrix.linux_arch == 'arm64' && 'arm64v8' || matrix.linux_arch }}" \
-            --build-arg="NODE_VERSION=16.20.1" \
+            --build-arg="NODE_VERSION=20.19.0" \
             --output type=local,dest=./prebuilds,platform-split=false \
             -f ./.github/docker/Dockerfile.musl \
             .

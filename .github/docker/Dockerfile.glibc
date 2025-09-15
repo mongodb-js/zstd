@@ -1,7 +1,5 @@
-ARG UBUNTU_VERSION=bionic
-FROM ubuntu:${UBUNTU_VERSION} AS build
-
-ARG NODE_VERSION=16.20.1
+FROM ubuntu:noble AS build
+ARG NODE_VERSION=20.19.3
 # Possible values: s390x, arm64, x64
 ARG NODE_ARCH
 ADD https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-${NODE_ARCH}.tar.gz /
