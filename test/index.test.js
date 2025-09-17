@@ -1,5 +1,5 @@
 const { test } = require('mocha');
-const { compress, decompress } = require('../lib/index');
+const { compress, decompress, getDefinedNapiVersion } = require('../lib/index');
 
 const { expect } = require('chai');
 
@@ -52,6 +52,12 @@ describe('compress', function () {
 
   test('decompress() with empty buffer', async function () {
     expect(await decompress(Buffer.from([]))).to.deep.equal(Buffer.from([]));
+  });
+});
+
+describe('misc', function () {
+  test('getDefinedNapiVersion() returns 9', function () {
+    expect(getDefinedNapiVersion()).to.equal('9');
   });
 });
 

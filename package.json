@@ -49,7 +49,7 @@
   },
   "binary": {
     "napi_versions": [
-      4
+      9
     ]
   },
   "mongodb:zstd_version": "1.5.6"
