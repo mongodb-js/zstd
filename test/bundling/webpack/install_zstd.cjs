@@ -1,5 +1,3 @@
-'use strict';
-
 const { execSync } = require('node:child_process');
 const { readFileSync } = require('node:fs');
 const { resolve } = require('node:path');
@@ -19,6 +17,6 @@ console.log(`zstd Version: ${zstdVersion}`);
 
 xtrace('npm pack --pack-destination test/bundling/webpack', { cwd: zstdRoot });
 
-xtrace(`npm install --no-save mongodb-js-zstd-${zstdVersion}.tgz`);
+xtrace(`npm install --ignore-scripts --no-save mongodb-js-zstd-${zstdVersion}.tgz`);
 
 console.log('zstd installed!');

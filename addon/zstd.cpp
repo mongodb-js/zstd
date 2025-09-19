@@ -1,5 +1,7 @@
 #include "zstd.h"
 
+#define NAPI_VERSION 9
+
 #include <napi.h>
 
 #include <vector>
@@ -49,9 +51,17 @@ void Decompress(const CallbackInfo& info) {
     worker->Queue();
 }
 
+Value GetDefinedNapiVersion(const CallbackInfo& info) {
+    return Napi::String::New(info.Env(), std::to_string(NAPI_VERSION));
+}
+
 Object Init(Env env, Object exports) {
     exports.Set(String::New(env, "compress"), Function::New(env, Compress));
     exports.Set(String::New(env, "decompress"), Function::New(env, Decompress));
+
+    exports.Set(String::New(env, "getDefinedNapiVersion"),
+                Function::New(env, GetDefinedNapiVersion));
+
     return exports;
 }
 
