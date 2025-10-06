@@ -51,23 +51,19 @@
       ],
     'cflags!': [ '-fno-exceptions' ],
     'cflags_cc!': [ '-fno-exceptions' ],
-    'cflags_cc': ['-std=c++17'],
+    'cflags_cc': [],
     'xcode_settings': {
       'GCC_ENABLE_CPP_EXCEPTIONS': 'YES',
       'CLANG_CXX_LIBRARY': 'libc++',
       'MACOSX_DEPLOYMENT_TARGET': '11',
       'GCC_SYMBOLS_PRIVATE_EXTERN': 'YES', # -fvisibility=hidden
       'OTHER_CFLAGS': [
-          '-std=c++17',
           '-stdlib=libc++'
         ],
     },
     'msvs_settings': {
       'VCCLCompilerTool': {
-        'ExceptionHandling': 1,
-        'AdditionalOptions': [
-          '-std:c++17'
-        ]
+        'ExceptionHandling': 1
       }
     },
   }]

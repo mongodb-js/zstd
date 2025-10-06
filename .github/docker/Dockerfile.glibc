@@ -9,7 +9,8 @@ ENV PATH=$PATH:/nodejs/bin
 WORKDIR /zstd
 COPY . .
 
-RUN yum install -y python39 git make gcc-c++ curl cmake
+RUN yum install -y python39 git make curl cmake gcc-toolset-14
+ENV PATH=/opt/rh/gcc-toolset-14/root/bin/:$PATH
 
 RUN python3 --version
 
