@@ -1,4 +1,4 @@
-FROM ubuntu:noble AS build
+FROM redhat/ubi8 AS build
 ARG NODE_VERSION=20.19.3
 # Possible values: s390x, arm64, x64
 ARG NODE_ARCH
@@ -9,8 +9,8 @@ ENV PATH=$PATH:/nodejs/bin
 WORKDIR /zstd
 COPY . .
 
-RUN apt-get -qq update
-RUN apt-get -qq install -y python3 build-essential curl cmake
+RUN yum install -y python39 git make gcc-c++ curl cmake
+
 RUN python3 --version
 
 RUN npm run install-zstd

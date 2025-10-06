@@ -35,7 +35,7 @@
     "install": "prebuild-install --runtime napi || npm run clean-install",
     "clean-install": "npm run install-zstd && npm run compile",
     "compile": "node-gyp rebuild",
-    "test": "mocha test/index.test.js",
+    "test": "mocha test/*.js",
     "install-zstd": "bash etc/install-zstd.sh",
     "check:eslint": "ESLINT_USE_FLAT_CONFIG=false eslint *ts lib/*.js test/*.js .*.json",
     "clang-format": "clang-format --style=file:.clang-format --Werror -i addon/*",
