@@ -5,9 +5,9 @@
 
 # s390x, arm64, amd64 for ubuntu
 # amd64 or arm64v8 for alpine
-LINUX_ARCH=arm64
+LINUX_ARCH=amd64
 
-NODE_VERSION=20.19.0
+NODE_VERSION=24.9.0
 
 SCRIPT_DIR=$(dirname ${BASH_SOURCE:-$0})
 PROJECT_DIR=$SCRIPT_DIR/..
@@ -33,10 +33,9 @@ build_and_test_glibc() {
             --build-arg="NODE_ARCH=$NODE_ARCH" \
             --build-arg="NODE_VERSION=$NODE_VERSION" \
             --build-arg="RUN_TEST=true" \
-            --output type=local,dest=./prebuilds,platform-split=false \
-            -f ./.github/docker/Dockerfile.glibc \
+            -f ./.github/docker/Dockerfile.glibc -t glibc-zstd-base \
             $PROJECT_DIR
 }
 
 
-build_and_test_musl
+build_and_test_glibc
