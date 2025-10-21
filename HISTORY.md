@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0-alpha](https://github.com/mongodb-js/zstd/compare/v2.0.1...v3.0.0-alpha) (2025-10-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* **NODE-7167:** specify napi version of 9 ([#87](https://github.com/mongodb-js/zstd/issues/87))
+* **NODE-7007:** remove support for node 16 and 18 ([#80](https://github.com/mongodb-js/zstd/issues/80))
+
+### Features
+
+* **NODE-7007:** remove support for node 16 and 18 ([#80](https://github.com/mongodb-js/zstd/issues/80)) ([9b8025f](https://github.com/mongodb-js/zstd/commit/9b8025f6fd50c1f295c2c058482875fb615fecda))
+* **NODE-7167:** specify napi version of 9 ([#87](https://github.com/mongodb-js/zstd/issues/87)) ([9f2bd47](https://github.com/mongodb-js/zstd/commit/9f2bd47f4a83fdc2660f55ae1d12039d51bfaa21))
+
+
+### Bug Fixes
+
+* **NODE-7227:** build glibc prebuilds on platforms with libc 2.28 ([#93](https://github.com/mongodb-js/zstd/issues/93)) ([36e96ca](https://github.com/mongodb-js/zstd/commit/36e96ca33f131b4d5bc852ff782fedc1cc07cc9a))
+
 ## [2.0.1](https://github.com/mongodb-js/zstd/compare/v2.0.0...v2.0.1) (2025-02-10)
 
 
