@@ -1,7 +1,7 @@
-const { test } = require('mocha');
-const { compress, decompress, getDefinedNapiVersion } = require('../lib/index');
+import { test } from 'mocha';
+import { compress, decompress, getDefinedNapiVersion } from '../lib/index';
 
-const { expect } = require('chai');
+import { expect } from 'chai';
 
 describe('compat tests', function () {
   let zstdLegacy;
