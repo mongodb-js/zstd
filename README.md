@@ -42,13 +42,14 @@ To verify the native `.node` packages, follow the same steps as above using `mon
 
 Only the following version combinations with the [MongoDB Node.js Driver](https://github.com/mongodb/node-mongodb-native) are considered stable.
 
-|                  | `@mongodb-js/zstd@1.x` | `@mongodb-js/zstd@2.x` |
-| ---------------- | ---------------------- | ---------------------- |
-| `mongodb@>=6.12` | ✓ `^1.1.0`             | `^2.0.0`               |
-| `mongodb@<6.12`  | ✓ `^1.1.0`             | N/A                    |
-| `mongodb@5.x`    | ✓                      | N/A                    |
-| `mongodb@4.x`    | ✓                      | N/A                    |
-| `mongodb@3.x`    | N/A                    | N/A                    |
+|                  | `@mongodb-js/zstd@1.x` | `@mongodb-js/zstd@2.x` | `@mongodb-js/zstd@7.x` |
+| ---------------- | ---------------------- | ---------------------- | ---------------------- |
+| `mongodb@7.x`    | N/A                    | N/A                    | ✓                      |
+| `mongodb@>=6.12` | `^1.1.0`               | ✓                      | N/A                    |
+| `mongodb@<6.12`  | `^1.1.0`               | N/A                    | N/A                    |
+| `mongodb@5.x`    | ✓                      | N/A                    | N/A                    |
+| `mongodb@4.x`    | ✓                      | N/A                    | N/A                    |
+| `mongodb@3.x`    | N/A                    | N/A                    | N/A                    |
 
 >[!Note]
 > `@mongodb-js/zstd@1.x` is deprecated - please use `@mongodb-js/zstd@2.x` instead.
