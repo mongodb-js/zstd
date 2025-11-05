@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.0.0](https://github.com/mongodb-js/zstd/compare/v3.0.0-alpha...v7.0.0) (2025-11-05)
+
+
+### Miscellaneous Chores
+
+* prepare for 7.0 release ([#101](https://github.com/mongodb-js/zstd/issues/101)) ([c7845f0](https://github.com/mongodb-js/zstd/commit/c7845f01091b02f3b49ee79b4766e10ef07e00f2))
+
 ## [3.0.0-alpha](https://github.com/mongodb-js/zstd/compare/v2.0.1...v3.0.0-alpha) (2025-10-21)
 
 

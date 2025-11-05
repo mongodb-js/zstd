@@ -1,6 +1,6 @@
 {
   "name": "@mongodb-js/zstd",
-  "version": "3.0.0-alpha",
+  "version": "7.0.0",
   "main": "lib/index.js",
   "types": "index.d.ts",
   "repository": "https://github.com/mongodb-js/zstd",
