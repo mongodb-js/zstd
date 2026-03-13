@@ -8,7 +8,8 @@
     "index.d.ts",
     "lib/index.js",
     "addon/*",
-    "binding.gyp"
+    "binding.gyp",
+    "etc/install-zstd.sh"
   ],
   "dependencies": {
     "node-addon-api": "^8.5.0",
