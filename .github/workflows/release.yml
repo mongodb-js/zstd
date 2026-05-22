@@ -6,7 +6,6 @@ on:
 permissions:
   contents: write
   pull-requests: write
-  id-token: write
 
 name: release
 
@@ -89,6 +88,9 @@ jobs:
 
   publish:
     needs: [release_please, ssdlc, build]
+    permissions:
+      id-token: write
+      contents: read
     environment: release
     runs-on: ubuntu-latest
     steps:
@@ -101,5 +103,3 @@ jobs:
 
       - run: npm publish --provenance --tag latest
         if: ${{ needs.release_please.outputs.release_created }}
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
