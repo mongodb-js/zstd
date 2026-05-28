@@ -34,7 +34,7 @@ gpg --verify mongodb-js-zstd-X.Y.Z.tgz.sig mongodb-js-zstd-X.Y.Z.tgz
 ```
 
 >[!Note]
-No GPG verification is done when using npm to install the package. The contents of the Github tarball and npm's tarball are identical.
+No GPG verification is done when using npm to install the package. The contents of the GitHub tarball and npm's tarball are identical.
 
 To verify the native `.node` packages, follow the same steps as above using `mongodb-js-zstd-X.Y.Z-platform.tgz` and the corresponding `.sig` file.
 
