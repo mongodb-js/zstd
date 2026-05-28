@@ -12,7 +12,7 @@ npm install @mongodb-js/zstd
 
 ### Release Integrity
 
-Releases are created automatically and signed using the [Node team's GPG key](https://pgp.mongodb.com/node-driver.asc). This applies to the git tag as well as all release packages provided as part of a GitHub release. To verify the provided packages, download the key and import it using gpg:
+Releases are created automatically and signed using the [Node team's GPG key](https://pgp.mongodb.com/node-driver.asc). All release packages provided as part of a GitHub release are signed. To verify the provided packages, download the key and import it using gpg:
 
 ```
 gpg --import node-driver.asc
@@ -34,9 +34,15 @@ gpg --verify mongodb-js-zstd-X.Y.Z.tgz.sig mongodb-js-zstd-X.Y.Z.tgz
 ```
 
 >[!Note]
-No verification is done when using npm to install the package. The contents of the Github tarball and npm's tarball are identical.
+No GPG verification is done when using npm to install the package. The contents of the Github tarball and npm's tarball are identical.
 
 To verify the native `.node` packages, follow the same steps as above using `mongodb-js-zstd-X.Y.Z-platform.tgz` and the corresponding `.sig` file.
+
+Releases published to the npm registry also include a [provenance attestation](https://docs.npmjs.com/generating-provenance-statements), which cryptographically links the package to its source repository and build workflow. To verify provenance:
+
+```shell
+npm audit signatures
+```
 
 ## MongoDB Node.js Driver Version Compatibility
 
