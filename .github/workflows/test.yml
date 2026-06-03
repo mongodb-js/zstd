@@ -11,7 +11,7 @@ jobs:
   host_tests:
     strategy:
       matrix:
-        os: [macos-latest, windows-2022, macos-13]
+        os: [macos-latest, windows-2022, macos-15-intel]
         node: [20.19.0, 22.x, 24.x]
       fail-fast: false
     runs-on: ${{ matrix.os }}
