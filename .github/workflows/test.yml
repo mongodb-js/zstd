@@ -75,8 +75,6 @@ jobs:
         run: |
           docker buildx create --name builder --bootstrap --use
           docker buildx build \
-            --cache-from type=gha,scope=glibc-${{ matrix.linux_arch }}-${{ matrix.node }} \
-            --cache-to type=gha,mode=max,scope=glibc-${{ matrix.linux_arch }}-${{ matrix.node }} \
             --platform linux/${{ matrix.linux_arch }} \
             --build-arg="NODE_ARCH=${{ matrix.linux_arch == 'amd64' && 'x64' || matrix.linux_arch }}" \
             --build-arg="NODE_VERSION=${{ steps.get_nodejs_version.outputs.version }}" \
@@ -117,9 +115,7 @@ jobs:
       - name: Run Buildx
         run: |
           docker buildx create --name builder --bootstrap --use
-          docker buildx build \
-            --cache-from type=gha,scope=musl-${{ matrix.linux_arch }}-${{ matrix.node }} \
-            --cache-to type=gha,mode=max,scope=musl-${{ matrix.linux_arch }}-${{ matrix.node }} \
+          docker --debug buildx build --progress=plain --no-cache \
             --platform linux/${{ matrix.linux_arch }} \
             --build-arg="PLATFORM=${{ matrix.linux_arch == 'arm64' && 'arm64v8' || matrix.linux_arch }}" \
             --build-arg="NODE_VERSION=${{ steps.get_nodejs_version.outputs.version }}" \
