@@ -24,6 +24,12 @@ jobs:
           cache: "npm"
           registry-url: "https://registry.npmjs.org"
 
+      - name: Cache zstd build
+        uses: actions/cache@v5
+        with:
+          path: deps
+          key: zstd-deps-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package.json', 'package-lock.json', 'etc/install-zstd.sh') }}
+
       - name: Install zstd
         run: npm run install-zstd
         shell: bash
@@ -38,6 +44,9 @@ jobs:
 
   container_tests_glibc:
     runs-on: ubuntu-latest
+    # QEMU-emulated builds occasionally hang; fail fast rather than burning the
+    # 6-hour default timeout. Successful runs complete in ~15 min.
+    timeout-minutes: 30
     strategy:
       matrix:
         linux_arch: [s390x, arm64, amd64]
@@ -76,6 +85,9 @@ jobs:
 
   container_tests_musl:
     runs-on: ubuntu-latest
+    # QEMU-emulated builds occasionally hang; fail fast rather than burning the
+    # 6-hour default timeout. Successful runs complete in ~15 min.
+    timeout-minutes: 30
     strategy:
       matrix:
         linux_arch: [amd64, arm64]
