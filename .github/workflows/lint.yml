@@ -16,7 +16,7 @@ jobs:
         lint-target: ["c++", "typescript"]
 
     steps:
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@v6
 
     - name: Use Node.js LTS
       uses: actions/setup-node@v5
