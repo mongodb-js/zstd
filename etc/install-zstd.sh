@@ -13,22 +13,24 @@ download_zstd() {
 	# only unpack the source and build files needed to compile the project
 	necessary_files="zstd-$ZSTD_VERSION/build zstd-$ZSTD_VERSION/lib zstd-$ZSTD_VERSION/programs"
 
+	# Download to a file before extracting so curl and tar failures are decoupled.
+	# Retry loop is used instead of --retry-all-errors because UBI8 ships curl 7.61
+	# which predates that flag (added in 7.71). --fail makes curl exit non-zero on
+	# HTTP 4xx/5xx (e.g. GitHub rate limiting concurrent CI jobs).
 	TMPFILE=$(mktemp)
-	# flags
-	# -L                       follow redirects
-	# -o                       download to file (decouples curl errors from tar)
-	# --fail                   exit non-zero on HTTP 4xx/5xx so --retry applies
-	# --retry                  retry up to 5 times (GitHub releases rate-limits concurrent CI jobs)
-	# --retry-delay            wait between retries
-	# --retry-all-errors       retry on any error, not just connection failures (curl 7.71+)
-	# --strip-components       ignore the top-level directory when unpacking
-	curl -L \
-		--fail \
-		--retry 5 \
-		--retry-delay 5 \
-		--retry-all-errors \
-		-o "$TMPFILE" \
+	ATTEMPTS=0
+	until curl -L --fail -o "$TMPFILE" \
 		"https://github.com/facebook/zstd/releases/download/v$ZSTD_VERSION/zstd-$ZSTD_VERSION.tar.gz"
+	do
+		ATTEMPTS=$((ATTEMPTS + 1))
+		if [ "$ATTEMPTS" -ge 5 ]; then
+			echo "Failed to download zstd after $ATTEMPTS attempts, giving up"
+			rm -f "$TMPFILE"
+			exit 1
+		fi
+		echo "Download failed, retrying in 5s (attempt $ATTEMPTS/5)..."
+		sleep 5
+	done
 	tar -zxf "$TMPFILE" -C deps/zstd --strip-components 1 $necessary_files
 	rm -f "$TMPFILE"
 }
