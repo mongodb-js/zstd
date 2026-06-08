@@ -12,14 +12,25 @@ download_zstd() {
 
 	# only unpack the source and build files needed to compile the project
 	necessary_files="zstd-$ZSTD_VERSION/build zstd-$ZSTD_VERSION/lib zstd-$ZSTD_VERSION/programs"
-	
+
+	TMPFILE=$(mktemp)
 	# flags
 	# -L                       follow redirects
-	# -C                       output directory
-	# -                        tar from stdin
+	# -o                       download to file (decouples curl errors from tar)
+	# --fail                   exit non-zero on HTTP 4xx/5xx so --retry applies
+	# --retry                  retry up to 5 times (GitHub releases rate-limits concurrent CI jobs)
+	# --retry-delay            wait between retries
+	# --retry-all-errors       retry on any error, not just connection failures (curl 7.71+)
 	# --strip-components       ignore the top-level directory when unpacking
-	curl -L "https://github.com/facebook/zstd/releases/download/v$ZSTD_VERSION/zstd-$ZSTD_VERSION.tar.gz" \
-	 	| tar  -zxf - -C deps/zstd --strip-components 1 $necessary_files
+	curl -L \
+		--fail \
+		--retry 5 \
+		--retry-delay 5 \
+		--retry-all-errors \
+		-o "$TMPFILE" \
+		"https://github.com/facebook/zstd/releases/download/v$ZSTD_VERSION/zstd-$ZSTD_VERSION.tar.gz"
+	tar -zxf "$TMPFILE" -C deps/zstd --strip-components 1 $necessary_files
+	rm -f "$TMPFILE"
 }
 
 build_zstd() {
@@ -42,6 +53,11 @@ build_zstd() {
 	cmake --build .  --target libzstd_static --config Release
 }
 
-clean_deps
-download_zstd
-build_zstd
+# If a previous build is restored from cache, skip everything.
+if [ -d "deps/zstd/out" ]; then
+	echo "deps/zstd already built, skipping download and build"
+else
+	clean_deps
+	download_zstd
+	build_zstd
+fi

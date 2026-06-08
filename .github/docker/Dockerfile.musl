@@ -5,10 +5,18 @@ ARG NODE_VERSION=20.19.0
 FROM ${PLATFORM}/node:${NODE_VERSION}-alpine AS build
 
 WORKDIR /zstd
-COPY . .
 
 RUN apk --no-cache add make g++ libc-dev curl bash python3 py3-pip cmake
-RUN npm run install-zstd && npm i
+
+# Copy only what's needed to download and build the zstd source, so this
+# layer is only invalidated when the zstd version or install script changes,
+# not on every source commit.
+COPY package.json package-lock.json .
+COPY etc/install-zstd.sh etc/
+RUN npm run install-zstd
+
+COPY . .
+RUN npm i
 RUN npm run prebuild
 
 ARG RUN_TEST

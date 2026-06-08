@@ -7,14 +7,20 @@ RUN mkdir -p /nodejs && tar -xzf /node-v${NODE_VERSION}-linux-${NODE_ARCH}.tar.g
 ENV PATH=$PATH:/nodejs/bin
 
 WORKDIR /zstd
-COPY . .
 
 RUN yum install -y python39 git make curl cmake gcc-toolset-14
 ENV PATH=/opt/rh/gcc-toolset-14/root/bin/:$PATH
 
 RUN python3 --version
 
+# Copy only what's needed to download and build the zstd source, so this
+# layer is only invalidated when the zstd version or install script changes,
+# not on every source commit.
+COPY package.json package-lock.json .
+COPY etc/install-zstd.sh etc/
 RUN npm run install-zstd
+
+COPY . .
 RUN npm install
 RUN npm run prebuild
 
