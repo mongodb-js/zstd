@@ -18,6 +18,7 @@ download_zstd() {
 	# which predates that flag (added in 7.71). --fail makes curl exit non-zero on
 	# HTTP 4xx/5xx (e.g. GitHub rate limiting concurrent CI jobs).
 	TMPFILE=$(mktemp)
+	trap 'rm -f "$TMPFILE"' EXIT
 	ATTEMPTS=0
 	until curl -L --fail -o "$TMPFILE" \
 		"https://github.com/facebook/zstd/releases/download/v$ZSTD_VERSION/zstd-$ZSTD_VERSION.tar.gz"
@@ -25,14 +26,12 @@ download_zstd() {
 		ATTEMPTS=$((ATTEMPTS + 1))
 		if [ "$ATTEMPTS" -ge 5 ]; then
 			echo "Failed to download zstd after $ATTEMPTS attempts, giving up"
-			rm -f "$TMPFILE"
 			exit 1
 		fi
 		echo "Download failed, retrying in 5s (attempt $ATTEMPTS/5)..."
 		sleep 5
 	done
 	tar -zxf "$TMPFILE" -C deps/zstd --strip-components 1 $necessary_files
-	rm -f "$TMPFILE"
 }
 
 build_zstd() {
