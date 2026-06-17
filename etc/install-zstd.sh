@@ -12,14 +12,26 @@ download_zstd() {
 
 	# only unpack the source and build files needed to compile the project
 	necessary_files="zstd-$ZSTD_VERSION/build zstd-$ZSTD_VERSION/lib zstd-$ZSTD_VERSION/programs"
-	
-	# flags
-	# -L                       follow redirects
-	# -C                       output directory
-	# -                        tar from stdin
-	# --strip-components       ignore the top-level directory when unpacking
-	curl -L "https://github.com/facebook/zstd/releases/download/v$ZSTD_VERSION/zstd-$ZSTD_VERSION.tar.gz" \
-	 	| tar  -zxf - -C deps/zstd --strip-components 1 $necessary_files
+
+	# Download to a file before extracting so curl and tar failures are decoupled.
+	# Retry loop is used instead of --retry-all-errors because UBI8 ships curl 7.61
+	# which predates that flag (added in 7.71). --fail makes curl exit non-zero on
+	# HTTP 4xx/5xx (e.g. GitHub rate limiting concurrent CI jobs).
+	TMPFILE=$(mktemp)
+	trap 'rm -f "$TMPFILE"' EXIT
+	ATTEMPTS=0
+	until curl -L --fail -o "$TMPFILE" \
+		"https://github.com/facebook/zstd/releases/download/v$ZSTD_VERSION/zstd-$ZSTD_VERSION.tar.gz"
+	do
+		ATTEMPTS=$((ATTEMPTS + 1))
+		if [ "$ATTEMPTS" -ge 5 ]; then
+			echo "Failed to download zstd after $ATTEMPTS attempts, giving up"
+			exit 1
+		fi
+		echo "Download failed, retrying in 5s (attempt $ATTEMPTS/5)..."
+		sleep 5
+	done
+	tar -zxf "$TMPFILE" -C deps/zstd --strip-components 1 $necessary_files
 }
 
 build_zstd() {
@@ -42,6 +54,11 @@ build_zstd() {
 	cmake --build .  --target libzstd_static --config Release
 }
 
-clean_deps
-download_zstd
-build_zstd
+# If a previous build is restored from cache, skip everything.
+if [ -d "deps/zstd/out" ]; then
+	echo "deps/zstd already built, skipping download and build"
+else
+	clean_deps
+	download_zstd
+	build_zstd
+fi
