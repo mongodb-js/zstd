@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.0.1](https://github.com/mongodb-js/zstd/compare/v7.0.0...v7.0.1) (2026-06-18)
+
+
+### Bug Fixes
+
+* **NODE-6642:** include install script in published files ([#110](https://github.com/mongodb-js/zstd/issues/110)) ([ac07be6](https://github.com/mongodb-js/zstd/commit/ac07be62268c1439112a588360a89e2097205cb8))
+
 ## [7.0.0](https://github.com/mongodb-js/zstd/compare/v3.0.0-alpha...v7.0.0) (2025-11-05)
 
 
