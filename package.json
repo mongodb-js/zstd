@@ -18,7 +18,7 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@mongodb-js/zstd": "^1.2.0",
-    "@typescript-eslint/eslint-plugin": "^8.60.1",
+    "@typescript-eslint/eslint-plugin": "^8.62.1",
     "@wasm-fmt/clang-format": "^21.1.4",
     "chai": "^4.5.0",
     "eslint": "^9.37.0",
@@ -27,7 +27,7 @@
     "mocha": "^11.7.6",
     "node-gyp": "^11.4.2",
     "prebuild": "^13.0.1",
-    "prettier": "^3.8.3"
+    "prettier": "^3.9.4"
   },
   "engines": {
     "node": ">= 20.19.0"
