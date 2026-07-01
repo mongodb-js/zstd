@@ -19,7 +19,7 @@
   "devDependencies": {
     "@mongodb-js/zstd": "^1.2.0",
     "@typescript-eslint/eslint-plugin": "^8.60.1",
-    "@wasm-fmt/clang-format": "^21.1.4",
+    "@wasm-fmt/clang-format": "^22.1.8",
     "chai": "^4.5.0",
     "eslint": "^9.37.0",
     "eslint-config-prettier": "^10.1.8",
