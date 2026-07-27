@@ -85,6 +85,18 @@ export function compress(buffer: Buffer | ArrayBuffer | Uint8Array, level: numbe
 export function decompress(buffer: Buffer): Promise<Buffer>;
 ```
 
+## AI Agent Configuration
+
+This repository uses [agentskills.io](https://agentskills.io) conventions for AI coding agent
+instructions. `AGENTS.md` is the canonical source of truth — tool-specific files like `CLAUDE.md`
+are generated references.
+
+### Adding a nested AGENTS.md
+
+1. Create an `AGENTS.md` in the target directory.
+2. Run `scripts/symlink-claude-md.sh` to generate the companion `CLAUDE.md`.
+3. Stage and commit both files.
+  
 ### Bugs / Feature Requests
 
 Think you’ve found a bug? Want to see a new feature in `@mongodb-js/zstd`? Please open a
