@@ -28,11 +28,12 @@ Instructions for AI coding agents working in this repository. This file is the s
 ## Code Conventions
 
 - **Null checks** — loose equality (`== null`), not `=== null`/`=== undefined`.
-- **Formatting** — Prettier: single quotes, 2-space indent, 100-char width, no trailing commas. C++ via `.clang-format`.
+- **Type imports** — inline: `import { type Foo }`.
+- **Formatting** — Prettier: single quotes, 2-space indent, 100-char width, no trailing commas.
 
 ## Commit Messages
 
-[Conventional Commits](https://www.conventionalcommits.org/) with a Jira ticket: `<type>(NODE-XXXX): <subject>` — types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`; breaking changes use `!` (e.g. `feat(NODE-XXXX)!: …`).
+- [Conventional Commits](https://www.conventionalcommits.org/) with a Jira ticket: `<type>(NODE-XXXX): <subject>` — types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`; breaking changes use `!` (e.g. `feat(NODE-XXXX)!: …`).
 
 ## Related Repositories
 
