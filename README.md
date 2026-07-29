@@ -96,7 +96,7 @@ are generated references.
 1. Create an `AGENTS.md` in the target directory.
 2. Run `scripts/symlink-claude-md.sh` to generate the companion `CLAUDE.md`.
 3. Stage and commit both files.
-  
+
 ### Bugs / Feature Requests
 
 Think you’ve found a bug? Want to see a new feature in `@mongodb-js/zstd`? Please open a
