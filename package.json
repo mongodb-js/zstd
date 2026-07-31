@@ -38,7 +38,7 @@
     "compile": "node-gyp rebuild",
     "test": "mocha test/*.js",
     "install-zstd": "bash etc/install-zstd.sh",
-    "check:eslint": "ESLINT_USE_FLAT_CONFIG=false eslint *ts lib/*.js test/*.js .*.json",
+    "check:eslint": "ESLINT_USE_FLAT_CONFIG=false eslint *.ts lib/*.js test/*.js .*.json",
     "clang-format": "clang-format --style=file:.clang-format --Werror -i addon/*",
     "check:clang-format": "clang-format --style=file:.clang-format --dry-run --Werror addon/*",
     "prebuild": "prebuild --runtime napi --strip --verbose --all"
