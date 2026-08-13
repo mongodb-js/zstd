@@ -94,8 +94,10 @@ are generated references.
 ### Adding a nested AGENTS.md
 
 1. Create an `AGENTS.md` in the target directory.
-2. Run `scripts/symlink-claude-md.sh` to generate the companion `CLAUDE.md`.
-3. Stage and commit both files.
+2. `git add` the file.
+3. Run `scripts/symlink-claude-md.sh` to generate the companion `CLAUDE.md`.
+    - Note: `scripts/symlink-claude-md.sh` is vendored from an [internal repo](https://github.com/10gen/mongohouse/blob/master/scripts/symlink-claude-md.sh) and should not be edited directly.
+4. Stage and commit the files.
 
 ### Bugs / Feature Requests
 

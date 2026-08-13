@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+
+# DO NOT EDIT - This file was vendored from an internal repo (https://github.com/10gen/mongohouse/blob/master/scripts/symlink-claude-md.sh)
+
 # 1. Ensure every staged AGENTS.md has a companion CLAUDE.md containing
 #    "@AGENTS.md" (a Claude Code import reference).
 # 2. Ensure .claude/skills is a symlink to .agents/skills.
