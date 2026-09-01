@@ -18,7 +18,7 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@mongodb-js/zstd": "^1.2.0",
-    "@typescript-eslint/eslint-plugin": "^8.67.0",
+    "@typescript-eslint/eslint-plugin": "^8.68.0",
     "@wasm-fmt/clang-format": "^22.1.8",
     "chai": "^4.5.0",
     "eslint": "^9.37.0",
